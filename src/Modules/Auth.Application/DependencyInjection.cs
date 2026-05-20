@@ -6,7 +6,7 @@ namespace Auth.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddAuthApplication(this IServiceCollection services)
     {
         services.AddMediatR(opt =>
         {

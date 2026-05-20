@@ -31,8 +31,7 @@ internal sealed class LoginCommandHandler(
             logger.LogWarning("Invalid credentials for user {Email}", emailResult.Value);
             return Result<TokenResponse>.Failure("Invalid credentials", ErrorType.Validation);
         }
-
-
+        
         if (passwordHasher.NeedsRehash(user.PasswordHash))
         {
             var hash = passwordHasher.HashPassword(command.Password);
