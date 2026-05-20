@@ -1,5 +1,6 @@
 ﻿using Auth.Application.Abstractions.Authentication;
 using Auth.Application.Abstractions.Persistance;
+using BuildingBlocks.Application.Abstractions;
 using MediatR;
 using SharedKernel.Common;
 

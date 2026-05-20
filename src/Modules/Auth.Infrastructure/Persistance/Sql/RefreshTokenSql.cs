@@ -1,4 +1,4 @@
-﻿namespace Auth.Infrastructure.Data.Sql;
+﻿namespace Auth.Infrastructure.Persistance.Sql;
 
 public static class RefreshTokenSql
 {
@@ -10,7 +10,7 @@ public static class RefreshTokenSql
                                                  is_revoked            AS IsRevoked,
                                                  created_at            AS CreatedAt
                                           FROM auth.refresh_tokens
-                                          WHERE token = @Token
+                                          WHERE token_hash = @TokenHash AND is_revoked = false AND expires_at > NOW()
                                           """;
 
     public const string CreateRefreshToken = """

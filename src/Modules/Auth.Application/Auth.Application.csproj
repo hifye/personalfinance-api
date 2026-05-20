@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\BuildingBlocks.csproj" />
       <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
     </ItemGroup>
 

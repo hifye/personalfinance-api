@@ -1,6 +1,6 @@
 ﻿namespace Auth.Application.Authentication.Responses;
 
 public record TokenResponse( 
-    string Token,
+    string AccesToken,
     string RefreshToken,
     DateTime RefreshTokenExpiresAt);

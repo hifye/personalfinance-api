@@ -4,6 +4,6 @@ using SharedKernel.Common;
 
 namespace Auth.Application.Authentication.Login;
 
-public abstract record LoginCommand(
+public sealed record LoginCommand(
     string Email,
     string Password) : IRequest<Result<TokenResponse>>;

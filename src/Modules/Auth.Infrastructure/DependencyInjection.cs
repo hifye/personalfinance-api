@@ -2,11 +2,15 @@
 using System.Text;
 using Auth.Application.Abstractions.Authentication;
 using Auth.Application.Abstractions.Persistance;
-using Auth.Application.Settings;
+using Auth.Application.Abstractions.Security;
+using Auth.Infrastructure.Authentication.Jwt;
+using Auth.Infrastructure.Authentication.JWT;
 using Auth.Infrastructure.Identity;
+using Auth.Infrastructure.Persistance.Connection;
 using Auth.Infrastructure.Persistance.Repositories;
 using Auth.Infrastructure.Persistance.UnitOfWork;
 using Auth.Infrastructure.Security;
+using BuildingBlocks.Application.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +29,7 @@ public static class DependencyInjection
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<ICurrentUser, CurrentUser>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IRefreshTokenHasher, RefreshTokenHasher>();
         services.AddHttpContextAccessor();
         
         services.Configure<JwtSettings>(configuration.GetSection("JWT"));
@@ -48,8 +53,7 @@ public static class DependencyInjection
                 };
             });
         
-        services.AddScoped<IDbConnection>(_ =>
-            new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")));
+        services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
         
         return services;
     }

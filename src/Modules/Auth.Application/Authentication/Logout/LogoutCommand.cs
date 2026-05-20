@@ -3,4 +3,4 @@ using SharedKernel.Common;
 
 namespace Auth.Application.Authentication.Logout;
 
-public abstract record LogoutCommand : IRequest<Result>;
+public sealed record LogoutCommand : IRequest<Result>;

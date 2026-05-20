@@ -2,7 +2,7 @@
 using Dapper;
 using SharedKernel.ValueObjects;
 
-namespace Auth.Infrastructure.Configurations.TypeHandlers;
+namespace SharedKernel.TypeHandlers;
 
 /// <summary>
 /// Manipulador de tipo para mapear o objeto de valor <see cref="Price"/> em consultas do Dapper.

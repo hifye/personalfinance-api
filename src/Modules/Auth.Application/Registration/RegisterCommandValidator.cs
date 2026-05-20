@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Auth.Domain.Constants;
+using FluentValidation;
 
 namespace Auth.Application.Registration;
 
@@ -8,12 +9,12 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required.")
-            .MaximumLength(100).WithMessage("Name cannot be longer than 100 characters.");
+            .MaximumLength(UserConstants.MaxNameLength).WithMessage("Name cannot be longer than 200 characters.");
         
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email is required.")
             .EmailAddress().WithMessage("Email is not valid.")
-            .MaximumLength(100).WithMessage("Email cannot be longer than 100 characters.");
+            .MaximumLength(UserConstants.MaxEmailLength).WithMessage("Email cannot be longer than 100 characters.");
         
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required.")

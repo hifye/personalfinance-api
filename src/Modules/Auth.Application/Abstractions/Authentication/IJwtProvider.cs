@@ -1,9 +1,9 @@
-﻿using Auth.Domain.Entities;
+﻿using Auth.Application.Authentication.Responses;
+using Auth.Domain.Entities;
 
 namespace Auth.Application.Abstractions.Authentication;
 
 public interface IJwtProvider
 {
-    string GenerateToken(User user);
-    string GenerateRefreshToken();
+    TokenResponse Generate(User user);
 }

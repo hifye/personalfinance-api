@@ -1,25 +1,25 @@
 ﻿using System.Data;
 using Auth.Application.Abstractions.Persistance;
 using Auth.Domain.Entities;
-using Auth.Infrastructure.Data.Sql;
+using Auth.Infrastructure.Persistance.Sql;
 using Dapper;
 using SharedKernel.ValueObjects;
 
 namespace Auth.Infrastructure.Persistance.Repositories;
 
-public class UserRepository(IUnitOfWork unitOfWork, IDbConnection connection) : IUserRepository
+public class UserRepository(IUnitOfWork unitOfWork) : IUserRepository
 {
     public async Task<User> GetUserById(Guid id) =>
-        (await connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id }))!;
+        (await unitOfWork.Connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id }))!;
 
     public async Task<User?> GetUserByEmail(Email email) =>
-        await connection.QueryFirstOrDefaultAsync<User>(
+        await unitOfWork.Connection.QueryFirstOrDefaultAsync<User>(
             UserSql.GetUserByEmail,
             new { Email = email }
         );
 
     public async Task CreateUser(User user) =>
-        await connection.ExecuteAsync(
+        await unitOfWork.Connection.ExecuteAsync(
             UserSql.CreateUser,
             new
             {
@@ -28,17 +28,17 @@ public class UserRepository(IUnitOfWork unitOfWork, IDbConnection connection) : 
                 user.PasswordHash,
                 user.CreatedAt
             },
-            unitOfWork.Transaction
+            transaction: unitOfWork.Transaction
         );
 
     public async Task<bool> UpdateUser(User user) =>
-        await connection.ExecuteAsync(
+        await unitOfWork.Connection.ExecuteAsync(
             UserSql.UpdateUser,
             new { user.PasswordHash, user.UpdatedAt, user.Id },
-            unitOfWork.Transaction
+            transaction: unitOfWork.Transaction
         ) > 0;
 
     public async Task<bool> DeleteUser(Guid id) =>
-        await connection.ExecuteAsync(UserSql.DeleteUser, new { Id = id }, unitOfWork.Transaction)
+        await unitOfWork.Connection.ExecuteAsync(UserSql.DeleteUser, new { Id = id }, transaction: unitOfWork.Transaction)
         > 0;
 }

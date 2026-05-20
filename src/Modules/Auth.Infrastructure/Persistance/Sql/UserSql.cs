@@ -1,4 +1,4 @@
-﻿namespace Auth.Infrastructure.Data.Sql;
+﻿namespace Auth.Infrastructure.Persistance.Sql;
 
 public static class UserSql
 {
@@ -29,13 +29,15 @@ public static class UserSql
                                      	name,
                                      	email,
                                      	password_hash,
-                                     	created_at
+                                     	created_at,
+                                     	updated_at
                                      )
                                      VALUES(
                                             (@Name),
                                             (@Email),
                                             (@PasswordHash),
-                                            (@CreatedAt))
+                                            (@CreatedAt),
+                                            (@UpdatedAt))
                                      )
                                      """;
 

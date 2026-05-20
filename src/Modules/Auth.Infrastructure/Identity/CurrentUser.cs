@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Auth.Application.Abstractions.Authentication;
+using BuildingBlocks.Application.Abstractions;
 using Microsoft.AspNetCore.Http;
 
 namespace Auth.Infrastructure.Identity;
@@ -7,5 +7,5 @@ namespace Auth.Infrastructure.Identity;
 public class CurrentUser(IHttpContextAccessor accessor) : ICurrentUser
 {
     public Guid UserId => Guid.Parse(accessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier) ??
-                                     throw new Exception("User ID claim not found"));
+                                     throw new UnauthorizedAccessException("User ID claim not found"));
 }

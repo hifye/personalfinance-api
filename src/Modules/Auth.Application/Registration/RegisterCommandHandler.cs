@@ -15,8 +15,6 @@ internal sealed class RegisterCommandHandler(
 {
     public async Task<Result> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        var hashedPassword = passwordHasher.HashPassword(command.Password);
-
         var emailResult = Email.Create(command.Email);
         if (emailResult.IsFailure)
         {
@@ -31,6 +29,8 @@ internal sealed class RegisterCommandHandler(
             return Result.Failure("Email already exists", ErrorType.Conflict);
         }
 
+        var hashedPassword = passwordHasher.HashPassword(command.Password);
+        
         var register = Domain.Entities.User.Create(command.Name, command.Email, hashedPassword);
         if (register.IsFailure)
         {

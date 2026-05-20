@@ -3,7 +3,7 @@ using SharedKernel.Common;
 
 namespace Auth.Application.Registration;
 
-public abstract record RegisterCommand(
+public sealed record RegisterCommand(
     string Name,
     string Email,
     string Password,

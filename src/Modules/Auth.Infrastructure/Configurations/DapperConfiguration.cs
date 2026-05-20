@@ -1,5 +1,6 @@
 ﻿using Auth.Infrastructure.Configurations.TypeHandlers;
 using Dapper;
+using SharedKernel.TypeHandlers;
 
 namespace Auth.Infrastructure.Configurations;
 
