@@ -38,7 +38,6 @@ public static class UserSql
                                             (@PasswordHash),
                                             (@CreatedAt),
                                             (@UpdatedAt))
-                                     )
                                      """;
 
     public const string UpdateUser = """

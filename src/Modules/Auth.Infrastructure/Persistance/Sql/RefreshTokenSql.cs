@@ -3,12 +3,12 @@
 public static class RefreshTokenSql
 {
     public const string GetRefreshToken = """
-                                          SELECT id                    AS Id,
-                                                 user_id               AS UserId,
-                                                 token                 AS Token,
-                                                 expires_at            AS ExpiresAt,
-                                                 is_revoked            AS IsRevoked,
-                                                 created_at            AS CreatedAt
+                                          SELECT id                         AS Id,
+                                                 user_id                    AS UserId,
+                                                 token_hash                 AS TokenHash,
+                                                 expires_at                 AS ExpiresAt,
+                                                 is_revoked                 AS IsRevoked,
+                                                 created_at                 AS CreatedAt
                                           FROM auth.refresh_tokens
                                           WHERE token_hash = @TokenHash AND is_revoked = false AND expires_at > NOW()
                                           """;
@@ -16,13 +16,13 @@ public static class RefreshTokenSql
     public const string CreateRefreshToken = """
                                              INSERT INTO auth.refresh_tokens 
                                                  (user_id, 
-                                                  token, 
+                                                  token_hash, 
                                                   expires_at,
                                                   is_revoked, 
                                                   created_at)
                                              VALUES (
                                                   (@UserId), 
-                                                  (@Token),
+                                                  (@TokenHash),
                                                   (@ExpiresAt), 
                                                   (@IsRevoked), 
                                                   (@CreatedAt))

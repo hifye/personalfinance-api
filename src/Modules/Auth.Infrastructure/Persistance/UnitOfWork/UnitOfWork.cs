@@ -8,14 +8,11 @@ public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly IDbConnection _connection;
 
-    public IDbConnection Connection => _connection;
-
     public IDbTransaction Transaction { get; }
 
-    public UnitOfWork(
-        IDbConnectionFactory factory)
+    public UnitOfWork(IDbConnection connection)
     {
-        _connection = factory.CreateConnection();
+        _connection = connection;
 
         if (_connection.State == ConnectionState.Closed)
         {
