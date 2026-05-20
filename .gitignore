@@ -1,0 +1,80 @@
+# Build artifacts
+bin/
+obj/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Visual Studio
+.vs/
+
+# Test artifacts
+TestResults/
+coverage/
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Secrets
+secrets.json
+# Build folders (.NET)
+#######################################
+bin/
+obj/
+
+#######################################
+# Rider / JetBrains
+#######################################
+.idea/
+*.sln.iml
+
+#######################################
+# Visual Studio
+#######################################
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+#######################################
+# Test results / coverage
+#######################################
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+#######################################
+# Logs
+#######################################
+logs/
+*.log
+
+#######################################
+# OS files
+#######################################
+Thumbs.db
+.DS_Store
+
+#######################################
+# NuGet
+#######################################
+packages/
+.nuget/
+
+#######################################
+# Environment / secrets
+#######################################
+secrets.json
+
+#######################################
+# Rider HTTP scratch files
+#######################################
