@@ -3,8 +3,8 @@ using System.Data;
 using System.Threading.Tasks;
 using Auth.Application.Abstractions.Persistance;
 using Auth.Domain.Entities;
-using Auth.Infrastructure.Persistance.Connection;
 using Auth.Infrastructure.Persistance.Sql;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using SharedKernel.ValueObjects;
 

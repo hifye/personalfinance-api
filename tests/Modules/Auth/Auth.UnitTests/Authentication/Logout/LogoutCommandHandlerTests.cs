@@ -1,5 +1,5 @@
 using Auth.Application.Abstractions.Persistance;
-using Auth.Application.Authentication.Logout;
+using Auth.Application.Features.Authentication.Logout;
 using BuildingBlocks.Application.Abstractions;
 using FluentAssertions;
 using NSubstitute;

@@ -3,12 +3,8 @@ using Auth.Application.Abstractions.Authentication;
 using Auth.Application.Abstractions.Persistance;
 using Auth.Application.Abstractions.Security;
 using Auth.Infrastructure.Authentication.Jwt;
-using Auth.Infrastructure.Identity;
-using Auth.Infrastructure.Persistance.Connection;
 using Auth.Infrastructure.Persistance.Repositories;
-using Auth.Infrastructure.Persistance.UnitOfWork;
 using Auth.Infrastructure.Security;
-using BuildingBlocks.Application.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +18,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // Persistência
-        services.AddScoped<IDbConnectionFactory>(_ =>
-            new DbConnectionFactory(configuration));
-
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        // Repositórios
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
@@ -34,10 +26,6 @@ public static class DependencyInjection
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IRefreshTokenHasher, RefreshTokenHasher>();
-
-        // Identidade
-        services.AddHttpContextAccessor();
-        services.AddScoped<ICurrentUser, CurrentUser>();
 
         // JWT
         services.Configure<JwtSettings>(configuration.GetSection("JWT"));

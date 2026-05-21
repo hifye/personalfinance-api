@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using Auth.Api.Extensions;
-using Auth.Application.Authentication.Login;
-using Auth.Application.Authentication.Logout;
-using Auth.Application.Authentication.PatchPassword;
-using Auth.Application.Authentication.RefreshToken;
-using Auth.Application.Registration;
+using Auth.Application.Features.Authentication.Login;
+using Auth.Application.Features.Authentication.Logout;
+using Auth.Application.Features.Authentication.PatchPassword;
+using Auth.Application.Features.Authentication.RefreshToken;
+using Auth.Application.Features.Registration;
+using BuildingBlocks.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

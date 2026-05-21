@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Auth.Application.Abstractions.Authentication;
-using Auth.Application.Authentication.Responses;
+using Auth.Application.Features.Authentication.Responses;
 using Auth.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

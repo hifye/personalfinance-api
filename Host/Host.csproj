@@ -18,6 +18,10 @@
     <ItemGroup>
       <ProjectReference Include="..\src\Modules\Auth\Auth.Api\Auth.Api.csproj" />
       <ProjectReference Include="..\src\Modules\Auth\Auth.Infrastructure\Auth.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog.Api\Catalog.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog.Application\Catalog.Application.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog.Domain\Catalog.Domain.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

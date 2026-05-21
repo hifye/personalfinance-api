@@ -1,7 +1,8 @@
 using Auth.Application.Abstractions.Authentication;
 using Auth.Application.Abstractions.Persistance;
-using Auth.Application.Registration;
+using Auth.Application.Features.Registration;
 using Auth.Domain.Entities;
+using BuildingBlocks.Application.Abstractions;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
