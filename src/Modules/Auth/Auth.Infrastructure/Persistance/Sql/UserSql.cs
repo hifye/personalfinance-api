@@ -25,27 +25,25 @@ public static class UserSql
                                          """;
 
     public const string CreateUser = """
-                                     INSERT INTO auth.users(
-                                     	name,
-                                     	email,
-                                     	password_hash,
-                                     	created_at,
-                                     	updated_at
-                                     )
+                                     INSERT INTO auth.users
+                                         (name,
+                                          email,
+                                     	  password_hash,
+                                     	  created_at)
                                      VALUES(
                                             (@Name),
                                             (@Email),
                                             (@PasswordHash),
-                                            (@CreatedAt),
-                                            (@UpdatedAt))
+                                            (@CreatedAt)
+                                     )
                                      """;
 
-    public const string UpdateUser = """
-                                     UPDATE auth.users
-                                     SET password_hash = @PasswordHash,
-                                     updated_at = @UpdatedAt
-                                     WHERE id = @Id
-                                     """;
+    public const string UpdatePassword = """
+                                         UPDATE auth.users
+                                         SET password_hash = @PasswordHash,
+                                         updated_at = @UpdatedAt
+                                         WHERE id = @Id
+                                         """;
 
     public const string DeleteUser = """
                                      DELETE from auth.users

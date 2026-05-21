@@ -10,11 +10,14 @@ internal sealed class DbConnectionFactory : IDbConnectionFactory
 
     public DbConnectionFactory(IConfiguration configuration)
     {
-        _connectionString = configuration.GetConnectionString("Database")!;
+        _connectionString = configuration.GetConnectionString("DefaultConnection")
+                            ?? throw new InvalidOperationException("DefaultConnection not found in configuration.");
     }
 
     public IDbConnection CreateConnection()
     {
-        return new NpgsqlConnection(_connectionString);
+        var connection = new NpgsqlConnection(_connectionString);
+        connection.Open();
+        return connection;
     }
 }

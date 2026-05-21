@@ -1,4 +1,5 @@
 ﻿using Auth.Application.Behaviors;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,9 @@ public static class DependencyInjection
             opt.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             opt.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         });
+        
+        services.AddValidatorsFromAssembly(
+            typeof(DependencyInjection).Assembly);
         
         return services;
     }

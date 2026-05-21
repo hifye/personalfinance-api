@@ -2,6 +2,7 @@
 using Auth.Api.Extensions;
 using Auth.Application.Authentication.Login;
 using Auth.Application.Authentication.Logout;
+using Auth.Application.Authentication.PatchPassword;
 using Auth.Application.Authentication.RefreshToken;
 using Auth.Application.Registration;
 using MediatR;
@@ -43,6 +44,17 @@ public static class AuthEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         );
+
+        group
+            .MapPatch(
+                "/update-password",
+                async (UpdatePasswordCommand command, ISender sender, CancellationToken ct) =>
+                {
+                    var result = await sender.Send(command, ct);
+                    return result.IsSuccess ? Results.NoContent() : result.ToProblemResult();
+                }
+            )
+            .RequireAuthorization();
 
         group
             .MapPost(

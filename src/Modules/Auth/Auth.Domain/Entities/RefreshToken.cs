@@ -11,11 +11,11 @@ public class RefreshToken
     public bool IsRevoked { get; private set; }
     public DateTime CreatedAt { get; private set; }
     
-    private RefreshToken(Guid userId, string token, DateTime expiresAt)
+    private RefreshToken(Guid userId, string tokenHash, DateTime expiresAt)
     {
         Id = Guid.NewGuid();
         UserId = userId;
-        TokenHash = token;
+        TokenHash = tokenHash;
         ExpiresAt = expiresAt;
         IsRevoked = false;
         CreatedAt = DateTime.UtcNow;

@@ -2,11 +2,14 @@ using Auth.Api;
 using Auth.Application;
 using Auth.Infrastructure;
 using Auth.Infrastructure.Configurations;
+using Host;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthApplication();
 builder.Services.AddAuthInfrastructure(builder.Configuration);
+
+builder.Services.AddHost();
 
 builder.Services.AddOpenApi();
 builder.Services.AddAuthorization();
@@ -20,6 +23,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseExceptionHandler();
 
 app.MapAuthModule();
 

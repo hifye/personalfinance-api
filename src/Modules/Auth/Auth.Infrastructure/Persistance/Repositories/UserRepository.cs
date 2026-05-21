@@ -50,7 +50,7 @@ public class UserRepository(IDbConnectionFactory connectionFactory, IUnitOfWork 
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.ExecuteAsync(
-            UserSql.UpdateUser,
+            UserSql.UpdatePassword,
             new
             {
                 user.PasswordHash,

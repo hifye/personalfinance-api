@@ -1,16 +1,14 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Auth.Application.Abstractions.Authentication;
 using Auth.Application.Authentication.Responses;
 using Auth.Domain.Entities;
-using Auth.Infrastructure.Authentication.Jwt;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Auth.Infrastructure.Authentication.JWT;
+namespace Auth.Infrastructure.Authentication.Jwt;
 
 internal sealed class JwtProvider(IOptions<JwtSettings> jwtSettings) : IJwtProvider
 {

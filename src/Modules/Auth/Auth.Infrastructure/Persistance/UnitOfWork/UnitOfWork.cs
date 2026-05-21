@@ -1,54 +1,55 @@
 ﻿using System.Data;
-using System.Threading.Tasks;
 using Auth.Application.Abstractions.Persistance;
 using Auth.Infrastructure.Persistance.Connection;
 
 namespace Auth.Infrastructure.Persistance.UnitOfWork;
 
-public sealed class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork : IUnitOfWork, IDisposable
 {
     private readonly IDbConnection _connection;
+    private IDbTransaction? _transaction;
 
-    public IDbTransaction Transaction { get; }
-
-    public UnitOfWork(IDbConnection connection)
+    public IDbTransaction Transaction
     {
-        _connection = connection;
+        get => _transaction ?? throw new InvalidOperationException(
+            "Transaction not started. Call BeginTransaction first.");
+    }
 
-        if (_connection.State == ConnectionState.Closed)
-        {
-            _connection.Open();
-        }
-
-        Transaction =
-            _connection.BeginTransaction();
+    public UnitOfWork(IDbConnectionFactory factory)
+    {
+        _connection = factory.CreateConnection();
+        _transaction = _connection.BeginTransaction();
     }
 
     public Task CommitAsync()
     {
         try
         {
-            Transaction.Commit();
-
+            _transaction?.Commit();
             return Task.CompletedTask;
         }
         catch
         {
-            Transaction.Rollback();
-
+            _transaction?.Rollback();
             throw;
+        }
+        finally
+        {
+            _transaction?.Dispose();
+            _transaction = _connection.BeginTransaction();
         }
     }
 
     public void Rollback()
     {
-        Transaction.Rollback();
+        _transaction?.Rollback();
+        _transaction?.Dispose();
+        _transaction = _connection.BeginTransaction();
     }
 
     public void Dispose()
     {
-        Transaction.Dispose();
-
+        _transaction?.Dispose();
         _connection.Dispose();
     }
 }
