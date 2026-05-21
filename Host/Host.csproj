@@ -15,8 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\Modules\Auth.Api\Auth.Api.csproj" />
-      <ProjectReference Include="..\src\Modules\Auth.Infrastructure\Auth.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Auth\Auth.Api\Auth.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Auth\Auth.Infrastructure\Auth.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

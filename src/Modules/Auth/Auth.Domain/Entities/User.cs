@@ -1,14 +1,15 @@
-﻿using Domain.Common;
-using Domain.ValueObjects;
+﻿using System;
+using SharedKernel.Common;
+using SharedKernel.ValueObjects;
 
-namespace Domain.Entities.Auth;
+namespace Auth.Domain.Entities;
 
 public class User
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; } = null!;
     public Email Email { get; private set; } = null!;
-    public string PasswordHash { get; set; } = null!;
+    public string PasswordHash { get; private set; } = null!;
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
@@ -39,10 +40,12 @@ public class User
             .Bind(() =>
             {
                 PasswordHash = passwordHash;
-                UpdatedAt = DateTime.UtcNow;
+                Touch();
                 return Result.Success();
             });
     }
+    
+    private void Touch() => UpdatedAt = DateTime.UtcNow;
     
     protected User() { }
 }
