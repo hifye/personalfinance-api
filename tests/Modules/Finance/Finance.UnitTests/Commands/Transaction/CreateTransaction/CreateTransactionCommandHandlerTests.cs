@@ -1,5 +1,6 @@
 using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
+using Catalog.Application.Contracts;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Transaction.CreateTransaction;
 using Finance.Domain.Enums;
@@ -15,7 +16,7 @@ public sealed class CreateTransactionCommandHandlerTests
 {
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly ITransactionRepository _transactionRepositoryMock;
-    private readonly ICatalogRepository _catalogRepositoryMock;
+    private readonly ICatalogModule _catalogModuleMock;
     private readonly IAccountRepository _accountRepositoryMock;
     private readonly ICurrentUser _currentUserMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -26,7 +27,7 @@ public sealed class CreateTransactionCommandHandlerTests
     {
         _recurringTransactionRepositoryMock = Substitute.For<IRecurringTransactionRepository>();
         _transactionRepositoryMock = Substitute.For<ITransactionRepository>();
-        _catalogRepositoryMock = Substitute.For<ICatalogRepository>();
+        _catalogModuleMock = Substitute.For<ICatalogModule>();
         _accountRepositoryMock = Substitute.For<IAccountRepository>();
         _currentUserMock = Substitute.For<ICurrentUser>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
@@ -35,7 +36,7 @@ public sealed class CreateTransactionCommandHandlerTests
         _handler = new CreateTransactionCommandHandler(
             _recurringTransactionRepositoryMock,
             _transactionRepositoryMock,
-            _catalogRepositoryMock,
+            _catalogModuleMock,
             _accountRepositoryMock,
             _currentUserMock,
             _unitOfWorkMock,
@@ -52,7 +53,7 @@ public sealed class CreateTransactionCommandHandlerTests
         var command = new CreateTransactionCommand(accountId, categoryId, null, 100m, TransactionType.Expense, "Test Transaction");
         
         _currentUserMock.UserId.Returns(userId);
-        _catalogRepositoryMock.GetCategoryById(categoryId).Returns(Catalog.Domain.Entities.Catalog.Create(userId, "Category", Catalog.Domain.Enums.CatalogType.Expense).Value);
+        _catalogModuleMock.CategoryExistsAsync(categoryId).Returns(true);
         _accountRepositoryMock.GetAccountById(accountId).Returns(Finance.Domain.Entities.Account.Create(userId, "Account", AccountType.Checking, 1000m).Value);
 
         // Act
@@ -70,7 +71,7 @@ public sealed class CreateTransactionCommandHandlerTests
     {
         // Arrange
         var command = new CreateTransactionCommand(Guid.NewGuid(), Guid.NewGuid(), null, 100m, TransactionType.Expense, "Test Transaction");
-        _catalogRepositoryMock.GetCategoryById(command.CategoryId).Returns((Catalog.Domain.Entities.Catalog?)null);
+        _catalogModuleMock.CategoryExistsAsync(command.CategoryId).Returns(false);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -88,7 +89,7 @@ public sealed class CreateTransactionCommandHandlerTests
         var userId = Guid.NewGuid();
         var command = new CreateTransactionCommand(Guid.NewGuid(), Guid.NewGuid(), null, 100m, TransactionType.Expense, "Test Transaction");
         
-        _catalogRepositoryMock.GetCategoryById(command.CategoryId).Returns(Catalog.Domain.Entities.Catalog.Create(userId, "Category", Catalog.Domain.Enums.CatalogType.Expense).Value);
+        _catalogModuleMock.CategoryExistsAsync(command.CategoryId).Returns(true);
         _accountRepositoryMock.GetAccountById(command.AccountId).Returns((Finance.Domain.Entities.Account?)null);
 
         // Act

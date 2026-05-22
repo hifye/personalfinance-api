@@ -12,12 +12,41 @@ using Finance.Api;
 using Finance.Application;
 using Finance.Infrastructure;
 using Host;
+using Scalar.AspNetCore;
+using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
 
-// Registra os handlers de tipos de dados
-DapperConfiguration.RegisterTypeHandlers();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-var builder = WebApplication.CreateBuilder(args);
+try
+{
+    Log.Information("Starting web host");
+    // Registra os handlers de tipos de dados
+    DapperConfiguration.RegisterTypeHandlers();
 
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Host.UseSerilog((context, services, configuration) =>
+    {
+        configuration
+            .ReadFrom.Configuration(context.Configuration)
+            .ReadFrom.Services(services)
+            .Enrich.FromLogContext()
+            .Enrich.WithExceptionDetails()
+            .Enrich.WithMachineName()
+            .Enrich.WithThreadId()
+            .Enrich.WithProcessId()
+            .Enrich.WithProcessName()
+            .Enrich.WithEnvironmentName()
+            .Enrich.WithProperty("ApplicationName", "PersonalFinance");
+    });
+
+// Configura o JSON
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.Converters.Add(
@@ -56,6 +85,18 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 
+app.MapScalarApiReference();
+
+app.UseSerilogRequestLogging(options =>
+{
+    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+    {
+        diagnosticContext.Set("User", httpContext.User.Identity?.Name ?? "Anonymous");
+        diagnosticContext.Set("RemoteIp", httpContext.Connection.RemoteIpAddress?.ToString());
+        diagnosticContext.Set("UserAgent", httpContext.Request.Headers.UserAgent.ToString());
+    };
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -67,3 +108,12 @@ app.MapCatalogModule();
 app.MapFinanceModule();
 
 app.Run();
+}
+catch (Exception ex) when (ex is not OperationCanceledException)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

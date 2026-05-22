@@ -1,5 +1,6 @@
 using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
+using Catalog.Application.Contracts;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -10,7 +11,7 @@ namespace Finance.Application.Features.Commands.RecurringTransaction.CreateRecur
 public sealed class CreateRecurringTransactionCommandHandler(
     IRecurringTransactionRepository recurringTransactionRepository,
     IUnitOfWork unitOfWork,
-    ICatalogRepository catalogRepository,
+    ICatalogModule catalogModule,
     IAccountRepository accountRepository,
     ICurrentUser currentUser, ILogger<CreateRecurringTransactionCommandHandler> logger)
     : IRequestHandler<CreateRecurringTransactionCommand, Result<Guid>>
@@ -25,8 +26,8 @@ public sealed class CreateRecurringTransactionCommandHandler(
         }
             
         
-        var category = await catalogRepository.GetCategoryById(command.CategoryId);
-        if (category is null)
+        var categoryExists = await catalogModule.CategoryExistsAsync(command.CategoryId, cancellationToken);
+        if (!categoryExists)
         {
             logger.LogWarning("Category with ID {CategoryId} not found", command.CategoryId);
             return Result<Guid>.Failure("Category Not Found", ErrorType.NotFound);

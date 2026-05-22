@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using BuildingBlocks.Application.Abstractions;
 
-namespace Auth.Infrastructure.Persistance.UnitOfWork;
+namespace BuildingBlocks.Infrastructure.Persistance;
 
 public sealed class UnitOfWork : IUnitOfWork, IDisposable
 {

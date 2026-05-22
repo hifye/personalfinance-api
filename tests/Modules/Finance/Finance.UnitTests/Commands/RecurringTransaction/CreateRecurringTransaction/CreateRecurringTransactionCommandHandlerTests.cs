@@ -1,5 +1,5 @@
 using BuildingBlocks.Application.Abstractions;
-using Catalog.Application.Abstractions.Persistance;
+using Catalog.Application.Contracts;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
 using Finance.Domain.Enums;
@@ -15,7 +15,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
 {
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
-    private readonly ICatalogRepository _catalogRepositoryMock;
+    private readonly ICatalogModule _catalogModuleMock;
     private readonly IAccountRepository _accountRepositoryMock;
     private readonly ICurrentUser _currentUserMock;
     private readonly ILogger<CreateRecurringTransactionCommandHandler> _loggerMock;
@@ -25,7 +25,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
     {
         _recurringTransactionRepositoryMock = Substitute.For<IRecurringTransactionRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
-        _catalogRepositoryMock = Substitute.For<ICatalogRepository>();
+        _catalogModuleMock = Substitute.For<ICatalogModule>();
         _accountRepositoryMock = Substitute.For<IAccountRepository>();
         _currentUserMock = Substitute.For<ICurrentUser>();
         _loggerMock = Substitute.For<ILogger<CreateRecurringTransactionCommandHandler>>();
@@ -33,7 +33,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
         _handler = new CreateRecurringTransactionCommandHandler(
             _recurringTransactionRepositoryMock,
             _unitOfWorkMock,
-            _catalogRepositoryMock,
+            _catalogModuleMock,
             _accountRepositoryMock,
             _currentUserMock,
             _loggerMock);
@@ -50,7 +50,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
 
         _currentUserMock.UserId.Returns(userId);
         _accountRepositoryMock.GetAccountById(accountId).Returns(Finance.Domain.Entities.Account.Create(userId, "Account", AccountType.Checking, 1000m).Value);
-        _catalogRepositoryMock.GetCategoryById(categoryId).Returns(Catalog.Domain.Entities.Catalog.Create(userId, "Category", Catalog.Domain.Enums.CatalogType.Expense).Value);
+        _catalogModuleMock.CategoryExistsAsync(categoryId).Returns(true);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -86,7 +86,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
         var command = new CreateRecurringTransactionCommand(Guid.NewGuid(), Guid.NewGuid(), 100m, TransactionType.Expense, "Description", RecurringFrequency.Monthly);
         
         _accountRepositoryMock.GetAccountById(command.AccountId).Returns(Finance.Domain.Entities.Account.Create(userId, "Account", AccountType.Checking, 1000m).Value);
-        _catalogRepositoryMock.GetCategoryById(command.CategoryId).Returns((Catalog.Domain.Entities.Catalog?)null);
+        _catalogModuleMock.CategoryExistsAsync(command.CategoryId).Returns(false);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
