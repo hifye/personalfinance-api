@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace Finance.Application.Features.Commands.Account.DeleteAccount;
 
-public class DeleteAccountCommandValidator : AbstractValidator<DeleteAccountCommand>
+public sealed class DeleteAccountCommandValidator : AbstractValidator<DeleteAccountCommand>
 {
     public DeleteAccountCommandValidator()
     {

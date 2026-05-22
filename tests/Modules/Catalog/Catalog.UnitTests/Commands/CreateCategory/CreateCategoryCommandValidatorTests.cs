@@ -1,11 +1,11 @@
-﻿using Catalog.Application.Features.Commands.CreateCategory;
+using Catalog.Application.Features.Commands.CreateCategory;
 using Catalog.Domain.Enums;
 using FluentAssertions;
 using Xunit;
 
 namespace Catalog.UnitTests.Commands.CreateCategory;
 
-public class CreateCategoryCommandValidatorTests
+public sealed class CreateCategoryCommandValidatorTests
 {
     private readonly CreateCategoryCommandValidator _validator = new();
 
@@ -64,3 +64,4 @@ public class CreateCategoryCommandValidatorTests
         result.IsValid.Should().BeTrue();
     }
 }
+

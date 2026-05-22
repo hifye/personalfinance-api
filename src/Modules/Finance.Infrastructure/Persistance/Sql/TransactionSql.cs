@@ -1,4 +1,4 @@
-﻿namespace Finance.Infrastructure.Persistance.Sql;
+namespace Finance.Infrastructure.Persistance.Sql;
 
 public static class TransactionSql
 {

@@ -2,7 +2,7 @@
 
 namespace Catalog.Application.Features.Commands.DeleteCategory;
 
-public class DeleteCategoryCommandValidator : AbstractValidator<DeleteCategoryCommand>
+public sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteCategoryCommand>
 {
     public DeleteCategoryCommandValidator()
     {

@@ -12,7 +12,7 @@ namespace BuildingBlocks.Behaviors;
 /// <typeparam name="TRequest">Tipo da requisição.</typeparam>
 /// <typeparam name="TResponse">Tipo da resposta.</typeparam>
 /// <param name="logger">Logger injetado.</param>
-public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+public sealed class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {

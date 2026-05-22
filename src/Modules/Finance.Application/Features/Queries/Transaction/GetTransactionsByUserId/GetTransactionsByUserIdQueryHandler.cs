@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using MediatR;
@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Queries.Transaction.GetTransactionsByUserId;
 
-public class GetTransactionsByUserIdQueryHandler(ITransactionQueries transactionQueries, ICurrentUser currentUser, ILogger<GetTransactionsByUserIdQueryHandler> logger)
+public sealed class GetTransactionsByUserIdQueryHandler(ITransactionQueries transactionQueries, ICurrentUser currentUser, ILogger<GetTransactionsByUserIdQueryHandler> logger)
     : IRequestHandler<GetTransactionsByUserIdQuery, Result<IReadOnlyList<TransactionListItem>>>
 {
     public async Task<Result<IReadOnlyList<TransactionListItem>>> Handle(GetTransactionsByUserIdQuery request, CancellationToken cancellationToken)

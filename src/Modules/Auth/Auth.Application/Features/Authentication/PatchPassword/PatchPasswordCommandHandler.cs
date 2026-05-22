@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Auth.Application.Features.Authentication.PatchPassword;
 
-public class PatchPasswordCommandHandler(
+public sealed class PatchPasswordCommandHandler(
     IUserRepository userRepository,
     IUnitOfWork unitOfWork,
     IPasswordHasher passwordHasher,

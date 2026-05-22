@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Catalog.UnitTests.Queries.GetCategoriesByUserId;
 
-public class GetCategoriesByUserIdQueryHandlerTests
+public sealed class GetCategoriesByUserIdQueryHandlerTests
 {
     private readonly ICatalogQueries _catalogQueriesMock;
     private readonly ICurrentUser _currentUserMock;
@@ -68,3 +68,4 @@ public class GetCategoriesByUserIdQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

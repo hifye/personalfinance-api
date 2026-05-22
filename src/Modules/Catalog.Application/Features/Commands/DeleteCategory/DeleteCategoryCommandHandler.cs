@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Commands.DeleteCategory;
 
-public class DeleteCategoryCommandHandler(ICatalogRepository catalogRepository, IUnitOfWork unitOfWork, ILogger<DeleteCategoryCommandHandler> logger)
+public sealed class DeleteCategoryCommandHandler(ICatalogRepository catalogRepository, IUnitOfWork unitOfWork, ILogger<DeleteCategoryCommandHandler> logger)
     : IRequestHandler<DeleteCategoryCommand, Result>
 {
     public async Task<Result> Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)

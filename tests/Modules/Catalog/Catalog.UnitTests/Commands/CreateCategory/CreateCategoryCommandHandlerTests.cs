@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Catalog.UnitTests.Commands.CreateCategory;
 
-public class CreateCategoryCommandHandlerTests
+public sealed class CreateCategoryCommandHandlerTests
 {
     private readonly ICatalogRepository _catalogRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -66,3 +66,4 @@ public class CreateCategoryCommandHandlerTests
         await _unitOfWorkMock.DidNotReceive().CommitAsync();
     }
 }
+

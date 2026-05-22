@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Account.PatchAccount;
 
-public class PatchAccountCommandHandler(IAccountRepository accountRepository, IUnitOfWork unitOfWork, ILogger<PatchAccountCommandHandler> logger)
+public sealed class PatchAccountCommandHandler(IAccountRepository accountRepository, IUnitOfWork unitOfWork, ILogger<PatchAccountCommandHandler> logger)
     : IRequestHandler<PatchAccountCommand, Result>
 {
     public async Task<Result> Handle(PatchAccountCommand command, CancellationToken cancellationToken)

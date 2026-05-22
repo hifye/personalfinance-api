@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Auth.UnitTests.Authentication.Login;
 
-public class LoginCommandHandlerTests
+public sealed class LoginCommandHandlerTests
 {
     private readonly IUserRepository _userRepositoryMock;
     private readonly IRefreshTokenRepository _refreshTokenRepositoryMock;
@@ -131,3 +131,4 @@ public class LoginCommandHandlerTests
         await _userRepositoryMock.Received(1).UpdateUser(user);
     }
 }
+

@@ -3,7 +3,7 @@ using SharedKernel.Common;
 
 namespace SharedKernel.ValueObjects;
 
-public record Email
+public sealed record Email
 {
     public string Address { get; } = null!;
 

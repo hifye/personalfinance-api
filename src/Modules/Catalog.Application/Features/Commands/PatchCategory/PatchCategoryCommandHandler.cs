@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Commands.PatchCategory;
 
-public class PatchCategoryCommandHandler(IUnitOfWork unitOfWork, ICatalogRepository catalogRepository, ILogger<PatchCategoryCommandHandler> logger)
+public sealed class PatchCategoryCommandHandler(IUnitOfWork unitOfWork, ICatalogRepository catalogRepository, ILogger<PatchCategoryCommandHandler> logger)
     : IRequestHandler<PatchCategoryCommand, Result>
 {
     public async Task<Result> Handle(PatchCategoryCommand command, CancellationToken cancellationToken)

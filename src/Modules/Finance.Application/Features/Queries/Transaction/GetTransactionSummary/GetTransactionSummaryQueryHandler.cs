@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using MediatR;
@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Queries.Transaction.GetTransactionSummary;
 
-public class GetTransactionSummaryQueryHandler(
+public sealed class GetTransactionSummaryQueryHandler(
     ITransactionQueries transactionQueries,
     ICurrentUser currentUser,
     ILogger<GetTransactionSummaryQueryHandler> logger

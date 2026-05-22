@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Constants;
 using FluentValidation;
 
 namespace Finance.Application.Features.Commands.Account.PatchAccount;
 
-public class PatchAccountCommandValidator : AbstractValidator<PatchAccountCommand>
+public sealed class PatchAccountCommandValidator : AbstractValidator<PatchAccountCommand>
 {
     public PatchAccountCommandValidator()
     {

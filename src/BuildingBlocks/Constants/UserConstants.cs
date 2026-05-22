@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Constants;
+namespace BuildingBlocks.Constants;
 
 public static class UserConstants
 {
@@ -6,3 +6,4 @@ public static class UserConstants
 
     public const int MaxNameLength = 200;
 }
+

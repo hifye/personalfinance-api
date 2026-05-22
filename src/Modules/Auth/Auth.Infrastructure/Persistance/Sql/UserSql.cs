@@ -1,4 +1,4 @@
-﻿namespace Auth.Infrastructure.Persistance.Sql;
+namespace Auth.Infrastructure.Persistance.Sql;
 
 public static class UserSql
 {

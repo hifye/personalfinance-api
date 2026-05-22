@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
 
-public class PatchRecurringTransactionCommandHandler(
+public sealed class PatchRecurringTransactionCommandHandler(
     IRecurringTransactionRepository recurringTransactionRepository,
     IUnitOfWork unitOfWork, ILogger<PatchRecurringTransactionCommandHandler> logger)
     : IRequestHandler<PatchRecurringTransactionCommand, Result>

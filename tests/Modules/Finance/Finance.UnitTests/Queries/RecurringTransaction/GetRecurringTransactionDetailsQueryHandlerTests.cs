@@ -1,4 +1,4 @@
-﻿using Finance.Application.Abstractions.Queries;
+using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.RecurringTransaction.GetRecurringTransactionDetails;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.RecurringTransaction;
 
-public class GetRecurringTransactionDetailsQueryHandlerTests
+public sealed class GetRecurringTransactionDetailsQueryHandlerTests
 {
     private readonly IRecurringTransactionQueries _recurringTransactionQueriesMock;
     private readonly ILogger<GetRecurringTransactionDetailsQueryHandler> _loggerMock;
@@ -62,3 +62,4 @@ public class GetRecurringTransactionDetailsQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

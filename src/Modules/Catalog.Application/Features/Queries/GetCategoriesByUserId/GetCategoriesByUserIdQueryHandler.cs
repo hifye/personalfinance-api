@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Queries.GetCategoriesByUserId;
 
-public class GetCategoriesByUserIdQueryHandler(ICatalogQueries categoryQueries, ICurrentUser currentUser, ILogger<GetCategoriesByUserIdQueryHandler> logger)
+public sealed class GetCategoriesByUserIdQueryHandler(ICatalogQueries categoryQueries, ICurrentUser currentUser, ILogger<GetCategoriesByUserIdQueryHandler> logger)
     : IRequestHandler<GetCategoriesByUserIdQuery, Result<IReadOnlyList<CatalogListItem>>>
 {
     public async Task<Result<IReadOnlyList<CatalogListItem>>> Handle(GetCategoriesByUserIdQuery query, CancellationToken cancellationToken)

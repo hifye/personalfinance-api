@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
 
-public class CreateRecurringTransactionCommandHandler(
+public sealed class CreateRecurringTransactionCommandHandler(
     IRecurringTransactionRepository recurringTransactionRepository,
     IUnitOfWork unitOfWork,
     ICatalogRepository catalogRepository,

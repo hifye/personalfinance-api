@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Transaction.DeleteTransaction;
     
-public class DeleteTransactionCommandHandler(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, ILogger<DeleteTransactionCommandHandler> logger)
+public sealed class DeleteTransactionCommandHandler(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, ILogger<DeleteTransactionCommandHandler> logger)
     : IRequestHandler<DeleteTransactionCommand, Result>
 {
     public async Task<Result> Handle(DeleteTransactionCommand command, CancellationToken cancellationToken)

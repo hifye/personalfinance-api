@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
@@ -8,7 +8,7 @@ using Finance.Infrastructure.Persistance.Sql;
 
 namespace Finance.Infrastructure.Persistance.Queries;
 
-public class RecurringTransactionQueries(IDbConnectionFactory connectionFactory)
+public sealed class RecurringTransactionQueries(IDbConnectionFactory connectionFactory)
     : IRecurringTransactionQueries
 {
     public async Task<RecurringTransactionListItem> GetRecurringTransactionDetails(Guid id)
@@ -49,3 +49,4 @@ public class RecurringTransactionQueries(IDbConnectionFactory connectionFactory)
             );
     }
 }
+

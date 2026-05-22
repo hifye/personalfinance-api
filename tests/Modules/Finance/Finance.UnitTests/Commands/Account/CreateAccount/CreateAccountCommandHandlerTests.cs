@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Account.CreateAccount;
 using Finance.Domain.Enums;
@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.CreateAccount;
 
-public class CreateAccountCommandHandlerTests
+public sealed class CreateAccountCommandHandlerTests
 {
     private readonly IAccountRepository _accountRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -67,3 +67,4 @@ public class CreateAccountCommandHandlerTests
         await _unitOfWorkMock.DidNotReceive().CommitAsync();
     }
 }
+

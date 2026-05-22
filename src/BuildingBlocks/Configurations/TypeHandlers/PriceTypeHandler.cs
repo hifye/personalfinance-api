@@ -7,7 +7,7 @@ namespace BuildingBlocks.Configurations.TypeHandlers;
 /// <summary>
 /// Manipulador de tipo para mapear o objeto de valor <see cref="Price"/> em consultas do Dapper.
 /// </summary>
-public class PriceTypeHandler : SqlMapper.TypeHandler<Price>
+public sealed class PriceTypeHandler : SqlMapper.TypeHandler<Price>
 {
     public override void SetValue(IDbDataParameter parameter, Price? value)
         => parameter.Value = value?.Value;

@@ -7,7 +7,7 @@ namespace BuildingBlocks.Configurations.TypeHandlers;
 /// <summary>
 /// Manipulador de tipo para mapear o objeto de valor <see cref="Email"/> em consultas do Dapper.
 /// </summary>
-public class EmailTypeHandler : SqlMapper.TypeHandler<Email>
+public sealed class EmailTypeHandler : SqlMapper.TypeHandler<Email>
 {
     public override void SetValue(IDbDataParameter parameter, Email? value)
         => parameter.Value = value?.Address;

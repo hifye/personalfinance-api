@@ -4,7 +4,7 @@ using SharedKernel.ValueObjects;
 
 namespace Finance.Domain.Entities;
 
-public class RecurringTransaction
+public sealed class RecurringTransaction
 {
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }

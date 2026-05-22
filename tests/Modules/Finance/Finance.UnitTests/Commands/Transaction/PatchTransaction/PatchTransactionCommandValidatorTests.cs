@@ -1,11 +1,11 @@
-﻿using Finance.Application.Features.Commands.Transaction.PatchTransaction;
+using Finance.Application.Features.Commands.Transaction.PatchTransaction;
 using Finance.Domain.Enums;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.PatchTransaction;
 
-public class PatchTransactionCommandValidatorTests
+public sealed class PatchTransactionCommandValidatorTests
 {
     private readonly PatchTransactionCommandValidator _validator;
 
@@ -38,3 +38,4 @@ public class PatchTransactionCommandValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

@@ -1,11 +1,11 @@
-﻿using Catalog.Application.Features.Commands.PatchCategory;
+using Catalog.Application.Features.Commands.PatchCategory;
 using Catalog.Domain.Enums;
 using FluentAssertions;
 using Xunit;
 
 namespace Catalog.UnitTests.Commands.PatchCategory;
 
-public class PatchCategoryCommandValidatorTests
+public sealed class PatchCategoryCommandValidatorTests
 {
     private readonly PatchCategoryCommandValidator _validator = new();
 
@@ -77,3 +77,4 @@ public class PatchCategoryCommandValidatorTests
         result.IsValid.Should().BeTrue();
     }
 }
+

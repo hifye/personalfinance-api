@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Constants;
 using FluentValidation;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
 
-public class PatchRecurringTransactionValidator : AbstractValidator<PatchRecurringTransactionCommand>
+public sealed class PatchRecurringTransactionValidator : AbstractValidator<PatchRecurringTransactionCommand>
 {
     public PatchRecurringTransactionValidator()
     {

@@ -1,4 +1,4 @@
-﻿using Finance.Application.Abstractions.Queries;
+using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.Transaction.GetTransactionDetails;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.Transaction;
 
-public class GetTransactionDetailsQueryHandlerTests
+public sealed class GetTransactionDetailsQueryHandlerTests
 {
     private readonly ITransactionQueries _transactionQueriesMock;
     private readonly ILogger<GetTransactionDetailsQueryHandler> _loggerMock;
@@ -62,3 +62,4 @@ public class GetTransactionDetailsQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

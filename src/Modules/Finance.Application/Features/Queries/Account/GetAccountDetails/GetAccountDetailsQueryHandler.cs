@@ -1,4 +1,4 @@
-﻿using Finance.Application.Abstractions.Queries;
+using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Queries.Account.GetAccountDetails;
 
-public class GetAccountDetailsQueryHandler(IAccountQueries accountQueries, ILogger<GetAccountDetailsQueryHandler> logger)
+public sealed class GetAccountDetailsQueryHandler(IAccountQueries accountQueries, ILogger<GetAccountDetailsQueryHandler> logger)
     : IRequestHandler<GetAccountDetailsQuery, Result<AccountListItem>>
 {
     public async Task<Result<AccountListItem>> Handle(GetAccountDetailsQuery query, CancellationToken cancellationToken)

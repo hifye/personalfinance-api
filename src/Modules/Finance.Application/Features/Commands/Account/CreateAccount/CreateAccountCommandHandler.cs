@@ -1,11 +1,11 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Account.CreateAccount;
 
-public class CreateAccountCommandHandler(
+public sealed class CreateAccountCommandHandler(
     IAccountRepository accountRepository,
     IUnitOfWork unitOfWork,
     ICurrentUser currentUser)

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Catalog.Application.Features.Commands.CreateCategory;
 
-public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
+public sealed class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
 {
     public CreateCategoryCommandValidator()
     {

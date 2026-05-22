@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Auth.UnitTests.Registration;
 
-public class RegisterCommandHandlerTests
+public sealed class RegisterCommandHandlerTests
 {
     private readonly IUserRepository _userRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -84,3 +84,4 @@ public class RegisterCommandHandlerTests
         await _unitOfWorkMock.Received(1).CommitAsync();
     }
 }
+

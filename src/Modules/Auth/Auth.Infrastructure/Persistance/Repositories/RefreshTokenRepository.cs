@@ -9,7 +9,7 @@ using Dapper;
 
 namespace Auth.Infrastructure.Persistance.Repositories;
 
-public class RefreshTokenRepository(IDbConnectionFactory connectionFactory, IUnitOfWork unitOfWork)
+public sealed class RefreshTokenRepository(IDbConnectionFactory connectionFactory, IUnitOfWork unitOfWork)
     : IRefreshTokenRepository
 {
     public async Task<RefreshToken?> GetRefreshTokenByHash(

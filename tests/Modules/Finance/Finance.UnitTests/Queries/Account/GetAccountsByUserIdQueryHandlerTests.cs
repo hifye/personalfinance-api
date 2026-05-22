@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.Account.GetAccountsByUserId;
@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.Account;
 
-public class GetAccountsByUserIdQueryHandlerTests
+public sealed class GetAccountsByUserIdQueryHandlerTests
 {
     private readonly IAccountQueries _accountQueriesMock;
     private readonly ICurrentUser _currentUserMock;
@@ -69,3 +69,4 @@ public class GetAccountsByUserIdQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

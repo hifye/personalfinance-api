@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.Transaction.GetTransactionSummary;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.Transaction;
 
-public class GetTransactionSummaryQueryHandlerTests
+public sealed class GetTransactionSummaryQueryHandlerTests
 {
     private readonly ITransactionQueries _transactionQueriesMock;
     private readonly ICurrentUser _currentUserMock;
@@ -67,3 +67,4 @@ public class GetTransactionSummaryQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.Validation);
     }
 }
+

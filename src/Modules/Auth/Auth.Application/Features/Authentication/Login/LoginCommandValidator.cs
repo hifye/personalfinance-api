@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Auth.Application.Features.Authentication.Login;
 
-public class LoginCommandValidator : AbstractValidator<LoginCommand>
+public sealed class LoginCommandValidator : AbstractValidator<LoginCommand>
 {
     public LoginCommandValidator()
     {

@@ -1,11 +1,11 @@
-﻿using Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
+using Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
 using Finance.Domain.Enums;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.CreateRecurringTransaction;
 
-public class CreateRecurringTransactionValidatorTests
+public sealed class CreateRecurringTransactionValidatorTests
 {
     private readonly CreateRecurringTransactionValidator _validator;
 
@@ -38,3 +38,4 @@ public class CreateRecurringTransactionValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

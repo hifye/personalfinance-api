@@ -1,10 +1,10 @@
-﻿using Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
+using Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.PatchRecurringTransaction;
 
-public class PatchRecurringTransactionValidatorTests
+public sealed class PatchRecurringTransactionValidatorTests
 {
     private readonly PatchRecurringTransactionValidator _validator;
 
@@ -29,3 +29,4 @@ public class PatchRecurringTransactionValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

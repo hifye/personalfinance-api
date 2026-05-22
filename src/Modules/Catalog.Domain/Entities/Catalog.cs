@@ -4,7 +4,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Domain.Entities;
 
-public class Catalog
+public sealed class Catalog
 {
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }

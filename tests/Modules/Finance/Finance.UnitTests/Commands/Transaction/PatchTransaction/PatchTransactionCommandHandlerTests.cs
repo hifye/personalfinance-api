@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Transaction.PatchTransaction;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.PatchTransaction;
 
-public class PatchTransactionCommandHandlerTests
+public sealed class PatchTransactionCommandHandlerTests
 {
     private readonly ITransactionRepository _transactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -68,3 +68,4 @@ public class PatchTransactionCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

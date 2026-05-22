@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Catalog.UnitTests.Queries.GetCategoryDetails;
 
-public class GetCategoryDetailsQueryHandlerTests
+public sealed class GetCategoryDetailsQueryHandlerTests
 {
     private readonly ICatalogQueries _catalogQueriesMock;
     private readonly ILogger<GetCategoryDetailsQueryHandler> _loggerMock;
@@ -67,3 +67,4 @@ public class GetCategoryDetailsQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

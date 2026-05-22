@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.PatchRecurringTransaction;
 
-public class PatchRecurringTransactionCommandHandlerTests
+public sealed class PatchRecurringTransactionCommandHandlerTests
 {
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -71,3 +71,4 @@ public class PatchRecurringTransactionCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Auth.UnitTests.Authentication.Logout;
 
-public class LogoutCommandHandlerTests
+public sealed class LogoutCommandHandlerTests
 {
     private readonly IRefreshTokenRepository _refreshTokenRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -44,3 +44,4 @@ public class LogoutCommandHandlerTests
         await _unitOfWorkMock.Received(1).CommitAsync();
     }
 }
+

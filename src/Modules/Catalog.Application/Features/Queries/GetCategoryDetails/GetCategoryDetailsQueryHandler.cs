@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Queries.GetCategoryDetails;
 
-public class GetCategoryDetailsQueryHandler(ICatalogQueries catalogQueries, ILogger<GetCategoryDetailsQueryHandler> logger)
+public sealed class GetCategoryDetailsQueryHandler(ICatalogQueries catalogQueries, ILogger<GetCategoryDetailsQueryHandler> logger)
     : IRequestHandler<GetCategoryDetailsQuery, Result<CatalogListItem>>
 {
     public async Task<Result<CatalogListItem>> Handle(GetCategoryDetailsQuery query, CancellationToken cancellationToken)

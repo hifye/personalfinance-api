@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
@@ -6,7 +6,7 @@ using Infrastructure.Data.Sql;
 
 namespace Finance.Infrastructure.Persistance.Queries;
 
-public class AccountQueries(IDbConnectionFactory connectionFactory) : IAccountQueries
+public sealed class AccountQueries(IDbConnectionFactory connectionFactory) : IAccountQueries
 {
     public async Task<AccountListItem> GetAccountDetails(Guid id)
     {

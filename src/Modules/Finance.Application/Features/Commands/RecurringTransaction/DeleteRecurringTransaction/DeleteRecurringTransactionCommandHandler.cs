@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
 
-public class DeleteRecurringTransactionCommandHandler(
+public sealed class DeleteRecurringTransactionCommandHandler(
     IRecurringTransactionRepository recurringTransactionRepository,
     IUnitOfWork unitOfWork, ILogger<DeleteRecurringTransactionCommandHandler> logger)
     : IRequestHandler<DeleteRecurringTransactionCommand, Result>

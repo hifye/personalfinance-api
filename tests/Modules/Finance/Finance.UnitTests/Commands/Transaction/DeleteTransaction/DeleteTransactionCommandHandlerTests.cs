@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Transaction.DeleteTransaction;
 using FluentAssertions;
@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.DeleteTransaction;
 
-public class DeleteTransactionCommandHandlerTests
+public sealed class DeleteTransactionCommandHandlerTests
 {
     private readonly ITransactionRepository _transactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -62,3 +62,4 @@ public class DeleteTransactionCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

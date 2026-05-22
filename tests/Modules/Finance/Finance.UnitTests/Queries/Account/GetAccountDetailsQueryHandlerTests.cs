@@ -1,4 +1,4 @@
-﻿using Finance.Application.Abstractions.Queries;
+using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.Account.GetAccountDetails;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.Account;
 
-public class GetAccountDetailsQueryHandlerTests
+public sealed class GetAccountDetailsQueryHandlerTests
 {
     private readonly IAccountQueries _accountQueriesMock;
     private readonly ILogger<GetAccountDetailsQueryHandler> _loggerMock;
@@ -62,3 +62,4 @@ public class GetAccountDetailsQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

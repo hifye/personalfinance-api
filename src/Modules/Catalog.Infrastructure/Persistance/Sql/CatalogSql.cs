@@ -1,6 +1,6 @@
-﻿namespace Catalog.Infrastructure.Persistance.Sql;
+namespace Catalog.Infrastructure.Persistance.Sql;
 
-public class CatalogSql
+public static class CatalogSql
 {
     public const string GetCategoryById = """
                                           SELECT id              AS Id,

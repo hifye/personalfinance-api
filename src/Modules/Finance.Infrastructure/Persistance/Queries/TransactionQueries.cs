@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
@@ -6,7 +6,7 @@ using Finance.Infrastructure.Persistance.Sql;
 
 namespace Finance.Infrastructure.Persistance.Queries;
 
-public class TransactionQueries(IDbConnectionFactory connectionFactory) : ITransactionQueries
+public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) : ITransactionQueries
 {
     public async Task<TransactionListItem> GetTransactionDetails(Guid id)
     {
@@ -49,3 +49,4 @@ public class TransactionQueries(IDbConnectionFactory connectionFactory) : ITrans
         )!;
     }
 }
+

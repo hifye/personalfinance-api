@@ -1,10 +1,10 @@
-﻿using Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
+using Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.DeleteRecurringTransaction;
 
-public class DeleteRecurringTransactionValidatorTests
+public sealed class DeleteRecurringTransactionValidatorTests
 {
     private readonly DeleteRecurringTransactionValidator _validator;
 
@@ -29,3 +29,4 @@ public class DeleteRecurringTransactionValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

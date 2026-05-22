@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Constants;
 using Finance.Domain.Enums;
 using FluentValidation;
 
 namespace Finance.Application.Features.Commands.Account.CreateAccount;
 
-public class CreateAccountValidator : AbstractValidator<CreateAccountCommand>
+public sealed class CreateAccountValidator : AbstractValidator<CreateAccountCommand>
 {
     public CreateAccountValidator()
     {

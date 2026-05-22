@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.RecurringTransaction.GetRecurringTransactionsByUserId;
@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.RecurringTransaction;
 
-public class GetRecurringTransactionsByUserIdQueryHandlerTests
+public sealed class GetRecurringTransactionsByUserIdQueryHandlerTests
 {
     private readonly IRecurringTransactionQueries _recurringTransactionQueriesMock;
     private readonly ICurrentUser _currentUserMock;
@@ -69,3 +69,4 @@ public class GetRecurringTransactionsByUserIdQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

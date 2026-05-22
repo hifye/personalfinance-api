@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Domain.Entities;
@@ -6,7 +6,7 @@ using Finance.Infrastructure.Persistance.Sql;
 
 namespace Finance.Infrastructure.Persistance.Repositories;
 
-public class TransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
+public sealed class TransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
     : ITransactionRepository
 {
     public async Task<Transaction?> GetTransactionById(Guid id)

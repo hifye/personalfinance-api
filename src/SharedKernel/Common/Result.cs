@@ -51,7 +51,7 @@ public class Result
         IsFailure ? Result<T>.Failure(Error!, ErrorType) : await func();
 }
 
-public class Result<T> : Result
+public sealed class Result<T> : Result
 {
     public T? Value { get; }
 

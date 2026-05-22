@@ -5,7 +5,7 @@ using Dapper;
 
 namespace Catalog.Infrastructure.Persistance.Repositories;
 
-public class CatalogRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory) : ICatalogRepository
+public sealed class CatalogRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory) : ICatalogRepository
 {
     public async Task<Domain.Entities.Catalog?> GetCategoryById(Guid id)
     {

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Auth.UnitTests.Authentication.RefreshToken;
 
-public class RefreshTokenCommandHandlerTests
+public sealed class RefreshTokenCommandHandlerTests
 {
     private readonly IRefreshTokenRepository _refreshTokenRepositoryMock;
     private readonly IUserRepository _userRepositoryMock;
@@ -99,3 +99,4 @@ public class RefreshTokenCommandHandlerTests
         await _unitOfWorkMock.Received(1).CommitAsync();
     }
 }
+

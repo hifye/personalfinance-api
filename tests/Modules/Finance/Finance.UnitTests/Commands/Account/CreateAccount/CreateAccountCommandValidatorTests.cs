@@ -1,11 +1,11 @@
-﻿using Finance.Application.Features.Commands.Account.CreateAccount;
+using Finance.Application.Features.Commands.Account.CreateAccount;
 using Finance.Domain.Enums;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.CreateAccount;
 
-public class CreateAccountCommandValidatorTests
+public sealed class CreateAccountCommandValidatorTests
 {
     private readonly CreateAccountValidator _validator;
 
@@ -46,3 +46,4 @@ public class CreateAccountCommandValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

@@ -1,6 +1,7 @@
-﻿namespace BuildingBlocks.Constants;
+namespace BuildingBlocks.Constants;
 
-public class RecurringTransactionConstants
+public static class RecurringTransactionConstants
 {
     public const int MaxDescriptionLength = 250;
 }
+

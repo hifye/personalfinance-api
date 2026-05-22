@@ -1,10 +1,10 @@
-﻿using Finance.Application.Features.Commands.Account.DeleteAccount;
+using Finance.Application.Features.Commands.Account.DeleteAccount;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.DeleteAccount;
 
-public class DeleteAccountCommandValidatorTests
+public sealed class DeleteAccountCommandValidatorTests
 {
     private readonly DeleteAccountCommandValidator _validator;
 
@@ -29,3 +29,4 @@ public class DeleteAccountCommandValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

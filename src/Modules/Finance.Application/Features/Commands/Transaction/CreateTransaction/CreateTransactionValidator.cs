@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Constants;
 using Finance.Domain.Enums;
 using FluentValidation;
 
 namespace Finance.Application.Features.Commands.Transaction.CreateTransaction;
 
-public class CreateTransactionValidator : AbstractValidator<CreateTransactionCommand>
+public sealed class CreateTransactionValidator : AbstractValidator<CreateTransactionCommand>
 {
     public CreateTransactionValidator()
     {

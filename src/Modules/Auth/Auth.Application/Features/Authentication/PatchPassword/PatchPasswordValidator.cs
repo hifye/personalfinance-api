@@ -2,7 +2,7 @@
 
 namespace Auth.Application.Features.Authentication.PatchPassword;
 
-public class PatchPasswordValidator : AbstractValidator<UpdatePasswordCommand>
+public sealed class PatchPasswordValidator : AbstractValidator<UpdatePasswordCommand>
 {
     public PatchPasswordValidator()
     {

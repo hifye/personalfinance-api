@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
 using FluentAssertions;
@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.DeleteRecurringTransaction;
 
-public class DeleteRecurringTransactionCommandHandlerTests
+public sealed class DeleteRecurringTransactionCommandHandlerTests
 {
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -62,3 +62,4 @@ public class DeleteRecurringTransactionCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

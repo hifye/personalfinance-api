@@ -1,4 +1,4 @@
-ï»¿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Account.PatchAccount;
 using Finance.Domain.Enums;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.PatchAccount;
 
-public class PatchAccountCommandHandlerTests
+public sealed class PatchAccountCommandHandlerTests
 {
     private readonly IAccountRepository _accountRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -74,7 +74,7 @@ public class PatchAccountCommandHandlerTests
         // Arrange
         var accountId = Guid.NewGuid();
         var account = Finance.Domain.Entities.Account.Create(Guid.NewGuid(), "Old Name", AccountType.Checking, 100m).Value;
-        // Ambos nulos para forÃ§ar falha na regra de domÃ­nio do Patch (pelo menos um campo deve ser fornecido)
+        // Ambos nulos para forçar falha na regra de domínio do Patch (pelo menos um campo deve ser fornecido)
         var command = new PatchAccountCommand(accountId, null, null);
 
         _accountRepositoryMock.GetAccountById(accountId).Returns(account);
@@ -88,3 +88,4 @@ public class PatchAccountCommandHandlerTests
         await _unitOfWorkMock.DidNotReceive().CommitAsync();
     }
 }
+

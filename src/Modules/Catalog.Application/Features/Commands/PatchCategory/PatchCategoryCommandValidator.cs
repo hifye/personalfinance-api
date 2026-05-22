@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Catalog.Application.Features.Commands.PatchCategory;
 
-public class PatchCategoryCommandValidator : AbstractValidator<PatchCategoryCommand>
+public sealed class PatchCategoryCommandValidator : AbstractValidator<PatchCategoryCommand>
 {
     public PatchCategoryCommandValidator()
     {

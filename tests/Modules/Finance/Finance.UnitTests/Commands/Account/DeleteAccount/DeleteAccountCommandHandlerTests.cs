@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.Account.DeleteAccount;
 using FluentAssertions;
@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.DeleteAccount;
 
-public class DeleteAccountCommandHandlerTests
+public sealed class DeleteAccountCommandHandlerTests
 {
     private readonly IAccountRepository _accountRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -62,3 +62,4 @@ public class DeleteAccountCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

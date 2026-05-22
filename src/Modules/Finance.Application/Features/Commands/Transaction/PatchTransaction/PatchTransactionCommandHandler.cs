@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Transaction.PatchTransaction;
 
-public class PatchTransactionCommandHandler(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, ILogger<PatchTransactionCommandHandler> logger)
+public sealed class PatchTransactionCommandHandler(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, ILogger<PatchTransactionCommandHandler> logger)
     : IRequestHandler<PatchTransactionCommand, Result>
 {
     public async Task<Result> Handle(PatchTransactionCommand command, CancellationToken cancellationToken)

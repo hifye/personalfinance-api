@@ -4,7 +4,7 @@ using Auth.Application.Abstractions.Security;
 
 namespace Auth.Infrastructure.Security;
 
-internal class RefreshTokenHasher : IRefreshTokenHasher
+internal sealed class RefreshTokenHasher : IRefreshTokenHasher
 {
     public string Hash(string token)
     {

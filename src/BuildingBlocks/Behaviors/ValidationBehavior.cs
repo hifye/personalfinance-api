@@ -9,7 +9,7 @@ namespace BuildingBlocks.Behaviors;
 /// <typeparam name="TRequest">Tipo da requisição que deve implementar <see cref="IRequest{TResponse}"/>.</typeparam>
 /// <typeparam name="TResponse">Tipo da resposta retornada pela requisição.</typeparam>
 /// <param name="validators">Coleção de validadores registrados para o tipo <typeparamref name="TRequest"/>.</param>
-public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
+public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {

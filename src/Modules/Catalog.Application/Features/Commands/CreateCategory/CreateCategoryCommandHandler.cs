@@ -5,7 +5,7 @@ using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Commands.CreateCategory;
 
-public class CreateCategoryCommandHandler(ICatalogRepository catalogRepository, IUnitOfWork unitOfWork, ICurrentUser currentUser) : IRequestHandler<CreateCategoryCommand, Result<Guid>>
+public sealed class CreateCategoryCommandHandler(ICatalogRepository catalogRepository, IUnitOfWork unitOfWork, ICurrentUser currentUser) : IRequestHandler<CreateCategoryCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateCategoryCommand command, CancellationToken cancellationToken)
     {

@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using Finance.Application.Features.Queries.Transaction.GetTransactionsByUserId;
@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Queries.Transaction;
 
-public class GetTransactionsByUserIdQueryHandlerTests
+public sealed class GetTransactionsByUserIdQueryHandlerTests
 {
     private readonly ITransactionQueries _transactionQueriesMock;
     private readonly ICurrentUser _currentUserMock;
@@ -69,3 +69,4 @@ public class GetTransactionsByUserIdQueryHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

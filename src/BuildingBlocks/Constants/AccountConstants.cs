@@ -1,6 +1,7 @@
-﻿namespace BuildingBlocks.Constants;
+namespace BuildingBlocks.Constants;
 
-public class AccountConstants
+public static class AccountConstants
 {
     public const int MaxNameLength = 50;
 }
+

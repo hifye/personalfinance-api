@@ -2,7 +2,7 @@
 
 namespace Auth.Domain.Entities;
 
-public class RefreshToken
+public sealed class RefreshToken
 {
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }

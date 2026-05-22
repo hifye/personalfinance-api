@@ -1,6 +1,6 @@
-﻿namespace Finance.Infrastructure.Persistance.Sql;
+namespace Finance.Infrastructure.Persistance.Sql;
 
-public class RecurringTransactionSql
+public static class RecurringTransactionSql
 {
     public const string GetRecurringTransactionById = """
                                                       SELECT id                     AS Id,
@@ -95,3 +95,4 @@ public class RecurringTransactionSql
                                                      WHERE id = @Id
                                                      """;
 }
+

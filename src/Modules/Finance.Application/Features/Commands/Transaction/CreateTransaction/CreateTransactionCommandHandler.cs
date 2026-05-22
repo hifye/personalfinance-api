@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
@@ -7,7 +7,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Transaction.CreateTransaction;
 
-public class CreateTransactionCommandHandler(
+public sealed class CreateTransactionCommandHandler(
     IRecurringTransactionRepository recurringTransactionRepository,
     ITransactionRepository transactionRepository,
     ICatalogRepository catalogRepository,
@@ -66,3 +66,4 @@ public class CreateTransactionCommandHandler(
             });
     }
 }
+

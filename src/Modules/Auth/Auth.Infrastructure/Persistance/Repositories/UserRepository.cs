@@ -10,7 +10,7 @@ using SharedKernel.ValueObjects;
 
 namespace Auth.Infrastructure.Persistance.Repositories;
 
-public class UserRepository(IDbConnectionFactory connectionFactory, IUnitOfWork unitOfWork)
+public sealed class UserRepository(IDbConnectionFactory connectionFactory, IUnitOfWork unitOfWork)
     : IUserRepository
 {
     public async Task<User> GetUserById(Guid id)

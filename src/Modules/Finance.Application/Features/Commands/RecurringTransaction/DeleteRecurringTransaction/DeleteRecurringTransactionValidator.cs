@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
 
-public class DeleteRecurringTransactionValidator : AbstractValidator<DeleteRecurringTransactionCommand>
+public sealed class DeleteRecurringTransactionValidator : AbstractValidator<DeleteRecurringTransactionCommand>
 {
     public DeleteRecurringTransactionValidator()
     {

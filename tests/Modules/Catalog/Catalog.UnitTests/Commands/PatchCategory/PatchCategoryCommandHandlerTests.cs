@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Catalog.UnitTests.Commands.PatchCategory;
 
-public class PatchCategoryCommandHandlerTests
+public sealed class PatchCategoryCommandHandlerTests
 {
     private readonly ICatalogRepository _catalogRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -87,3 +87,4 @@ public class PatchCategoryCommandHandlerTests
         await _unitOfWorkMock.DidNotReceive().CommitAsync();
     }
 }
+

@@ -6,7 +6,7 @@ using Dapper;
 
 namespace Catalog.Infrastructure.Persistance.Queries;
 
-public class CatalogQueries(IDbConnectionFactory connectionFactory) : ICatalogQueries
+public sealed class CatalogQueries(IDbConnectionFactory connectionFactory) : ICatalogQueries
 {
     public async Task<CatalogListItem> GetCategoryDetails(Guid id)
     {

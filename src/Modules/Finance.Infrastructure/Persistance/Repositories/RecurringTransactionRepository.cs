@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Domain.Entities;
@@ -6,7 +6,7 @@ using Finance.Infrastructure.Persistance.Sql;
 
 namespace Finance.Infrastructure.Persistance.Repositories;
 
-public class RecurringTransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
+public sealed class RecurringTransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
     : IRecurringTransactionRepository
 {
     public async Task<RecurringTransaction?> GetRecurringTransactionById(Guid id)

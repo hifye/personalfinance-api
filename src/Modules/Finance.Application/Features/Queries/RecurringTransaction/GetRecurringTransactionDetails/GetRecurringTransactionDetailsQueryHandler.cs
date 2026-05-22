@@ -1,4 +1,4 @@
-﻿using Finance.Application.Abstractions.Queries;
+using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Queries.RecurringTransaction.GetRecurringTransactionDetails;
 
-public class GetRecurringTransactionDetailsQueryHandler(IRecurringTransactionQueries recurringTransactionQueries, ILogger<GetRecurringTransactionDetailsQueryHandler> logger)
+public sealed class GetRecurringTransactionDetailsQueryHandler(IRecurringTransactionQueries recurringTransactionQueries, ILogger<GetRecurringTransactionDetailsQueryHandler> logger)
     : IRequestHandler<GetRecurringTransactionDetailsQuery, Result<RecurringTransactionListItem>>
 {
     public async Task<Result<RecurringTransactionListItem>> Handle(GetRecurringTransactionDetailsQuery query, CancellationToken cancellationToken)

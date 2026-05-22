@@ -9,7 +9,7 @@ namespace Auth.Infrastructure.Security;
 /// <summary>
 /// Provedor de hashing de senhas que utiliza o algoritmo Argon2id para garantir alta segurança.
 /// </summary>
-public class PasswordHasher : IPasswordHasher
+public sealed class PasswordHasher : IPasswordHasher
 {
     private const int SaltSize = 32;
     private const int HashSize = 32;

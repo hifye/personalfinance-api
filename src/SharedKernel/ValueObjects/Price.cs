@@ -2,7 +2,7 @@
 
 namespace SharedKernel.ValueObjects;
 
-public record Price
+public sealed record Price
 {
     public decimal Value { get; }
     

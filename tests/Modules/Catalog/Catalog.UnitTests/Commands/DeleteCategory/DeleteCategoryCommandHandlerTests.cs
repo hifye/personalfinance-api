@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Catalog.UnitTests.Commands.DeleteCategory;
 
-public class DeleteCategoryCommandHandlerTests
+public sealed class DeleteCategoryCommandHandlerTests
 {
     private readonly ICatalogRepository _catalogRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -63,3 +63,4 @@ public class DeleteCategoryCommandHandlerTests
         await _unitOfWorkMock.DidNotReceive().CommitAsync();
     }
 }
+

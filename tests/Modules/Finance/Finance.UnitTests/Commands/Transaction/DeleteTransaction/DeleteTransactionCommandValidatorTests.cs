@@ -1,10 +1,10 @@
-﻿using Finance.Application.Features.Commands.Transaction.DeleteTransaction;
+using Finance.Application.Features.Commands.Transaction.DeleteTransaction;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.DeleteTransaction;
 
-public class DeleteTransactionCommandValidatorTests
+public sealed class DeleteTransactionCommandValidatorTests
 {
     private readonly DeleteTransactionCommandValidator _validator;
 
@@ -29,3 +29,4 @@ public class DeleteTransactionCommandValidatorTests
         result.ShouldNotHaveAnyValidationErrors();
     }
 }
+

@@ -2,7 +2,7 @@
 
 namespace Catalog.Application;
 
-public class AssemblyReference
+public sealed class AssemblyReference
 {
     public static readonly Assembly Assembly = typeof(AssemblyReference).Assembly;
 }

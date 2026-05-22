@@ -4,7 +4,7 @@ using SharedKernel.ValueObjects;
 
 namespace Finance.Domain.Entities;
 
-public class Transaction
+public sealed class Transaction
 {
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }

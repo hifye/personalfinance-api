@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.CreateRecurringTransaction;
 
-public class CreateRecurringTransactionCommandHandlerTests
+public sealed class CreateRecurringTransactionCommandHandlerTests
 {
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
@@ -97,3 +97,4 @@ public class CreateRecurringTransactionCommandHandlerTests
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }
+

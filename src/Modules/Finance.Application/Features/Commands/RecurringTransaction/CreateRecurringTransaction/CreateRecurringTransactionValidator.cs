@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Constants;
 using Finance.Domain.Enums;
 using FluentValidation;
 
 namespace Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
 
-public class CreateRecurringTransactionValidator : AbstractValidator<CreateRecurringTransactionCommand>
+public sealed class CreateRecurringTransactionValidator : AbstractValidator<CreateRecurringTransactionCommand>
 {
     public CreateRecurringTransactionValidator()
     {

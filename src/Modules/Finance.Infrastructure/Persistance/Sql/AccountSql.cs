@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Data.Sql;
+namespace Infrastructure.Data.Sql;
 
-public class AccountSql
+public static class AccountSql
 {
     public const string GetAccountById = """
                                          SELECT id              AS Id,
@@ -70,3 +70,4 @@ public class AccountSql
                                         WHERE id = @Id
                                         """;
 }
+
