@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\SharedKernel\SharedKernel.csproj" />
-      <ProjectReference Include="..\..\BuildingBlocks\BuildingBlocks.csproj" />
+      <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
     </ItemGroup>
 
 </Project>

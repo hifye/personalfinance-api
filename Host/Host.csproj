@@ -18,14 +18,14 @@
     <ItemGroup>
       <ProjectReference Include="..\src\Modules\Auth\Auth.Api\Auth.Api.csproj" />
       <ProjectReference Include="..\src\Modules\Auth\Auth.Infrastructure\Auth.Infrastructure.csproj" />
-      <ProjectReference Include="..\src\Modules\Catalog.Api\Catalog.Api.csproj" />
-      <ProjectReference Include="..\src\Modules\Catalog.Application\Catalog.Application.csproj" />
-      <ProjectReference Include="..\src\Modules\Catalog.Domain\Catalog.Domain.csproj" />
-      <ProjectReference Include="..\src\Modules\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
-      <ProjectReference Include="..\src\Modules\Finance.Api\Finance.Api.csproj" />
-      <ProjectReference Include="..\src\Modules\Finance.Application\Finance.Application.csproj" />
-      <ProjectReference Include="..\src\Modules\Finance.Domain\Finance.Domain.csproj" />
-      <ProjectReference Include="..\src\Modules\Finance.Infrastructure\Finance.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog\Catalog.Api\Catalog.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog\Catalog.Application\Catalog.Application.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog\Catalog.Domain\Catalog.Domain.csproj" />
+      <ProjectReference Include="..\src\Modules\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance\Finance.Api\Finance.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance\Finance.Application\Finance.Application.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance\Finance.Domain\Finance.Domain.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance\Finance.Infrastructure\Finance.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

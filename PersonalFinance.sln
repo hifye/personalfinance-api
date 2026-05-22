@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF8B8947-D148-4A22-B4DB-E7331A0271FD}"
 EndProject
@@ -30,13 +30,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.UnitTests", "tests\Mod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{3B79EC34-2FFD-42F8-83B5-BFFEB8B1BF80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Domain", "src\Modules\Catalog.Domain\Catalog.Domain.csproj", "{43434522-6CDB-4A23-A935-36A3F32AF3BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Domain", "src\Modules\Catalog\Catalog.Domain\Catalog.Domain.csproj", "{43434522-6CDB-4A23-A935-36A3F32AF3BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Application", "src\Modules\Catalog.Application\Catalog.Application.csproj", "{DBA00197-F8B4-497E-81B1-CF0C11A344C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Application", "src\Modules\Catalog\Catalog.Application\Catalog.Application.csproj", "{DBA00197-F8B4-497E-81B1-CF0C11A344C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Infrastructure", "src\Modules\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{889FBAF0-4D57-4335-957E-9DCD100602A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Infrastructure", "src\Modules\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{889FBAF0-4D57-4335-957E-9DCD100602A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "src\Modules\Catalog.Api\Catalog.Api.csproj", "{DF076052-9F82-4D13-B49E-CC5192FC3D56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "src\Modules\Catalog\Catalog.Api\Catalog.Api.csproj", "{DF076052-9F82-4D13-B49E-CC5192FC3D56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{58ACDCC8-2AEE-9D01-9B82-A1B8CDF8BF55}"
 EndProject
@@ -44,13 +44,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.UnitTests", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{693E946F-6823-418F-A6F6-9D120B267414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Domain", "src\Modules\Finance.Domain\Finance.Domain.csproj", "{A6F6B797-7AFE-4D38-A5F0-6AD23FF7901A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Domain", "src\Modules\Finance\Finance.Domain\Finance.Domain.csproj", "{A6F6B797-7AFE-4D38-A5F0-6AD23FF7901A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Application", "src\Modules\Finance.Application\Finance.Application.csproj", "{914D2F84-0368-412F-BBC6-EDD8C2E44497}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Application", "src\Modules\Finance\Finance.Application\Finance.Application.csproj", "{914D2F84-0368-412F-BBC6-EDD8C2E44497}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Infrastructure", "src\Modules\Finance.Infrastructure\Finance.Infrastructure.csproj", "{BDEF630A-0A59-49B7-9622-6219FCD5A26C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Infrastructure", "src\Modules\Finance\Finance.Infrastructure\Finance.Infrastructure.csproj", "{BDEF630A-0A59-49B7-9622-6219FCD5A26C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Api", "src\Modules\Finance.Api\Finance.Api.csproj", "{45CA1171-FB6E-4767-A43B-4B9BB615A7C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Api", "src\Modules\Finance\Finance.Api\Finance.Api.csproj", "{45CA1171-FB6E-4767-A43B-4B9BB615A7C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{06170411-A699-B94A-5A25-F3EB5CA598A7}"
 EndProject

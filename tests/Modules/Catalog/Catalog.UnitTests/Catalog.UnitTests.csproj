@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\Modules\Catalog.Application\Catalog.Application.csproj" />
-    <ProjectReference Include="..\..\..\..\src\Modules\Catalog.Domain\Catalog.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Modules\Catalog\Catalog.Application\Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Modules\Catalog\Catalog.Domain\Catalog.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\src\SharedKernel\SharedKernel.csproj" />
     <ProjectReference Include="..\..\..\..\src\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
