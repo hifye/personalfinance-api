@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BuildingBlocks.Constants;
+using FluentValidation;
 
 namespace Catalog.Application.Features.Commands.PatchCategory;
 
@@ -10,9 +11,11 @@ public class PatchCategoryCommandValidator : AbstractValidator<PatchCategoryComm
             .NotEmpty().WithMessage("Id is required.");
         
         RuleFor(x => x.Name)
-            .MaximumLength(100).WithMessage("Name cannot be longer than 100 characters.");
+            .MaximumLength(CatalogConstants.MaxNameLength).WithMessage($"Name cannot be longer than {CatalogConstants.MaxNameLength} characters.");
         
         RuleFor(x => x.Type)
-            .MaximumLength(100).WithMessage("Type cannot be longer than 100 characters.");
+            .IsInEnum()
+            .When(x => x.Type.HasValue)
+            .WithMessage("Invalid category type.");
     }
 }

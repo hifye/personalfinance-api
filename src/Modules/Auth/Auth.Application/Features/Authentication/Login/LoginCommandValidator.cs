@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Constants;
+﻿using BuildingBlocks.Constants;
 using FluentValidation;
 
 namespace Auth.Application.Features.Authentication.Login;

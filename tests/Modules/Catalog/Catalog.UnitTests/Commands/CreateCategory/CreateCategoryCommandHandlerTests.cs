@@ -1,6 +1,7 @@
 using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
 using Catalog.Application.Features.Commands.CreateCategory;
+using Catalog.Domain.Enums;
 using FluentAssertions;
 using NSubstitute;
 using SharedKernel.Common;
@@ -32,7 +33,7 @@ public class CreateCategoryCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var command = new CreateCategoryCommand("Test Category", "Expense");
+        var command = new CreateCategoryCommand("Test Category", CatalogType.Expense);
         _currentUserMock.UserId.Returns(userId);
 
         // Act
@@ -52,7 +53,7 @@ public class CreateCategoryCommandHandlerTests
     public async Task Handle_ShouldReturnFailure_WhenDomainValidationFails()
     {
         // Arrange
-        var command = new CreateCategoryCommand("", "Expense"); // Name is mandatory
+        var command = new CreateCategoryCommand("", CatalogType.Expense); // Name is mandatory
         _currentUserMock.UserId.Returns(Guid.NewGuid());
 
         // Act

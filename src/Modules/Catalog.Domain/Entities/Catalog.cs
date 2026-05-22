@@ -1,4 +1,6 @@
-﻿using SharedKernel.Common;
+﻿using BuildingBlocks.Constants;
+using Catalog.Domain.Enums;
+using SharedKernel.Common;
 
 namespace Catalog.Domain.Entities;
 
@@ -7,11 +9,11 @@ public class Catalog
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public string Name { get; private set; } = null!;
-    public string Type { get; private set; } = null!;
+    public CatalogType Type { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
-    private Catalog(Guid userId, string name, string type)
+    private Catalog(Guid userId, string name, CatalogType type)
     {
         Id = Guid.NewGuid();
         UserId = userId;
@@ -20,32 +22,29 @@ public class Catalog
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
     }
-    
-    public static Result<Catalog> Create(Guid userId, string name, string type)
+
+    public static Result<Catalog> Create(Guid userId, string name, CatalogType type)
     {
         return Guard.AgainstOutOfRange(userId == Guid.Empty, "The User id is mandatory.")
             .Bind(() => Guard.AgainstNullOrWhiteSpace(name, "The field name is mandatory."))
-            .Bind(() => name.Length > 100
-                ? Result.Failure("The field name cannot be longer than 100 characters.", ErrorType.Validation)
-                : Result.Success())
-            .Bind(() => Guard.AgainstNullOrWhiteSpace(type, "The field type is mandatory"))
-            .Bind(() => type.Length > 100
-                ? Result.Failure("The field type cannot be longer than 100 characters.", ErrorType.Validation)
+            .Bind(() => name.Length > CatalogConstants.MaxNameLength
+                ? Result.Failure($"The field name cannot be longer than {CatalogConstants.MaxNameLength} characters.", ErrorType.Validation)
                 : Result.Success())
             .Map(() => new Catalog(userId, name, type));
     }
 
-    public Result Patch(string? name, string? type, bool? isActive)
+    public Result Patch(string? name, CatalogType? type, bool? isActive)
     {
-        return Guard.AgainstOutOfRange(name == null && type == null && isActive == null, "At least one field must be provided for patching.")
+        return Guard.AgainstOutOfRange(name == null && type == null && isActive == null,
+                "At least one field must be provided for patching.")
             .Bind(() => name != null ? UpdateName(name) : Result.Success())
-            .Bind(() => type != null ? UpdateType(type) : Result.Success())
+            .Bind(() => type != null ? UpdateType(type.Value) : Result.Success())
             .Bind(() => isActive != null ? UpdateIsActive(isActive.Value) : Result.Success());
     }
 
     private Result UpdateName(string name)
     {
-        return Guard.AgainstOutOfRange(name.Length > 100, "The field name cannot be longer than 100 characters.")
+        return Guard.AgainstOutOfRange(name.Length > CatalogConstants.MaxNameLength, $"The field name cannot be longer than {CatalogConstants.MaxNameLength} characters.")
             .Bind(() =>
             {
                 Name = name;
@@ -53,14 +52,10 @@ public class Catalog
             });
     }
 
-    private Result UpdateType(string type)
+    private Result UpdateType(CatalogType type)
     {
-        return Guard.AgainstOutOfRange(type.Length > 100, "The field type cannot be longer than 100 characters.") 
-            .Bind(() =>
-            {
-                Type = type;
-                return Result.Success();
-            });
+        Type = type;
+        return Result.Success();
     }
 
     private Result UpdateIsActive(bool isActive)
@@ -68,6 +63,8 @@ public class Catalog
         IsActive = isActive;
         return Result.Success();
     }
-    
-    protected Catalog() { }
+
+    protected Catalog()
+    {
+    }
 }

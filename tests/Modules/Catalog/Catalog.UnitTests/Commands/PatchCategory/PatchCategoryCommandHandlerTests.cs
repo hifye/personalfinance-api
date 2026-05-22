@@ -1,6 +1,7 @@
 using BuildingBlocks.Application.Abstractions;
 using Catalog.Application.Abstractions.Persistance;
 using Catalog.Application.Features.Commands.PatchCategory;
+using Catalog.Domain.Enums;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -33,7 +34,7 @@ public class PatchCategoryCommandHandlerTests
     {
         // Arrange
         var categoryId = Guid.NewGuid();
-        var category = Catalog.Domain.Entities.Catalog.Create(Guid.NewGuid(), "Old Name", "Old Type").Value;
+        var category = Catalog.Domain.Entities.Catalog.Create(Guid.NewGuid(), "Old Name", CatalogType.Expense).Value;
         var command = new PatchCategoryCommand(categoryId, "New Name", null, null);
 
         _catalogRepositoryMock.GetCategoryById(categoryId).Returns(category);
@@ -71,7 +72,7 @@ public class PatchCategoryCommandHandlerTests
     {
         // Arrange
         var categoryId = Guid.NewGuid();
-        var category = Catalog.Domain.Entities.Catalog.Create(Guid.NewGuid(), "Old Name", "Old Type").Value;
+        var category = Catalog.Domain.Entities.Catalog.Create(Guid.NewGuid(), "Old Name", CatalogType.Expense).Value;
         // Name too long (> 100)
         var command = new PatchCategoryCommand(categoryId, new string('a', 101), null, null);
 

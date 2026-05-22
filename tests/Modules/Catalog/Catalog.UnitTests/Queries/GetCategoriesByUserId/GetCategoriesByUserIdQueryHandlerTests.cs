@@ -37,8 +37,8 @@ public class GetCategoriesByUserIdQueryHandlerTests
         _currentUserMock.UserId.Returns(userId);
         var categories = new List<CatalogListItem>
         {
-            new CatalogListItem(Guid.NewGuid(), "Cat 1", "Expense", true, DateTime.UtcNow),
-            new CatalogListItem(Guid.NewGuid(), "Cat 2", "Income", true, DateTime.UtcNow)
+            new CatalogListItem(Guid.NewGuid(), "Cat 1", Catalog.Domain.Enums.CatalogType.Expense, true, DateTime.UtcNow),
+            new CatalogListItem(Guid.NewGuid(), "Cat 2", Catalog.Domain.Enums.CatalogType.Income, true, DateTime.UtcNow)
         };
 
         _catalogQueriesMock.GetCategoriesByUserId(userId).Returns(categories);

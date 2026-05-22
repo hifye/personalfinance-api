@@ -9,5 +9,7 @@ public static class DapperConfiguration
     {
         SqlMapper.AddTypeHandler(new EmailTypeHandler());
         SqlMapper.AddTypeHandler(new PriceTypeHandler());
+        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+        SqlMapper.AddTypeHandler(new NullableDateOnlyTypeHandler());
     }
 }

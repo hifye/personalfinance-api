@@ -22,6 +22,10 @@
       <ProjectReference Include="..\src\Modules\Catalog.Application\Catalog.Application.csproj" />
       <ProjectReference Include="..\src\Modules\Catalog.Domain\Catalog.Domain.csproj" />
       <ProjectReference Include="..\src\Modules\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance.Api\Finance.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance.Application\Finance.Application.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance.Domain\Finance.Domain.csproj" />
+      <ProjectReference Include="..\src\Modules\Finance.Infrastructure\Finance.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

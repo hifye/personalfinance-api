@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Catalog.Domain.Enums;
+using MediatR;
 using SharedKernel.Common;
 
 namespace Catalog.Application.Features.Commands.CreateCategory;
 
 public record CreateCategoryCommand(
     string Name,
-    string Type) : IRequest<Result<Guid>>;
+    CatalogType Type) : IRequest<Result<Guid>>;

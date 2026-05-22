@@ -34,7 +34,7 @@ public class GetCategoryDetailsQueryHandlerTests
         var catalogListItem = new CatalogListItem(
             categoryId,
             "Test Category",
-            "Expense",
+            Catalog.Domain.Enums.CatalogType.Expense,
             true,
             DateTime.UtcNow
         );

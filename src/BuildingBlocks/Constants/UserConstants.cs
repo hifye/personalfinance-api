@@ -1,4 +1,4 @@
-﻿namespace Auth.Domain.Constants;
+﻿namespace BuildingBlocks.Constants;
 
 public static class UserConstants
 {
