@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>f470de4d-6a01-47ab-b67a-42c32a5d4432</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -37,6 +38,12 @@
       <ProjectReference Include="..\src\Modules\Finance\Finance.Application\Finance.Application.csproj" />
       <ProjectReference Include="..\src\Modules\Finance\Finance.Domain\Finance.Domain.csproj" />
       <ProjectReference Include="..\src\Modules\Finance\Finance.Infrastructure\Finance.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
