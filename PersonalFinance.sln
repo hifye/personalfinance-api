@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF8B8947-D148-4A22-B4DB-E7331A0271FD}"
 EndProject
@@ -55,6 +55,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{06170411-A699-B94A-5A25-F3EB5CA598A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.UnitTests", "tests\Modules\Finance\Finance.UnitTests\Finance.UnitTests.csproj", "{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0EB5918F-33AF-4343-BD9A-E0D836159C05}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		.env = .env
+		docker-compose.override.yml = docker-compose.override.yml
+		.env.example = .env.example
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

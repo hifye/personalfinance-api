@@ -46,6 +46,12 @@ try
             .Enrich.WithProperty("ApplicationName", "PersonalFinance");
     });
 
+    var connectionString =
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new InvalidOperationException(
+            "DefaultConnection string was not configured."
+        );
+    
 // Configura o JSON
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -53,6 +59,9 @@ builder.Services.ConfigureHttpJsonOptions(options =>
         new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
     );
 });
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(connectionString);
 
 // Auth
 builder.Services.AddAuthApplication();
@@ -100,12 +109,13 @@ app.UseSerilogRequestLogging(options =>
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseExceptionHandler();
+app.UseExceptionHandler("/error");
 
 // Mapeia Modulos 
 app.MapAuthModule();
 app.MapCatalogModule();
 app.MapFinanceModule();
+app.MapHealthChecks("/health");
 
 app.Run();
 }

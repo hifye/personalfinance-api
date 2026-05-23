@@ -1,0 +1,77 @@
+﻿networks:
+  backend:
+    driver: bridge
+
+  frontend:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  logs_data:
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: personalfinance-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: personalfinance
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+#      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    networks:
+      - backend
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d personalfinance"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  api:
+    image: personalfinance-api:${TAG}
+    container_name: personalfinance_api
+
+    build:
+      context: .
+      dockerfile: Host/Dockerfile
+      target: final
+
+    restart: unless-stopped
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
+
+      JWT__Key: ${JWT__KEY}
+      JWT__Issuer: ${JWT__ISSUER}
+      JWT__Audience: ${JWT__AUDIENCE}
+
+      JWT__AccessTokenExpirationMinutes: ${JWT_ACCESS_EXPIRY}
+      JWT__RefreshTokenExpirationDays: ${JWT_REFRESH_EXPIRY}
+
+    volumes:
+      - logs_data:/app/logs
+
+    networks:
+      - backend
+      - frontend
+
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

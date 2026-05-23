@@ -74,6 +74,7 @@ packages/
 # Environment / secrets
 #######################################
 secrets.json
+.env
 
 #######################################
 # Rider HTTP scratch files
