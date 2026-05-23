@@ -1,4 +1,4 @@
-﻿networks:
+networks:
   backend:
     driver: bridge
 
@@ -22,10 +22,19 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-#      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
     networks:
       - backend
+
+    security_opt:
+      - no-new-privileges:true
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d personalfinance"]
@@ -69,8 +78,14 @@ services:
       - backend
       - frontend
 
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
     healthcheck:
-      test: ["CMD-SHELL", "wget --spider -q http://localhost:8080/health || exit 1"]
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:8080/health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
