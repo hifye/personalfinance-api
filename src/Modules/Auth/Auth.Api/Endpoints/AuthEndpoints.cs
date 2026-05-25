@@ -25,16 +25,18 @@ public static class AuthEndpoints
                 var result = await sender.Send(command, ct);
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
-        );
+        )
+        .RequireRateLimiting("auth-strict");
 
         group.MapPost(
-            "/login",
-            async (LoginCommand command, ISender sender, CancellationToken ct) =>
-            {
-                var result = await sender.Send(command, ct);
-                return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
-            }
-        );
+                "/login",
+                async (LoginCommand command, ISender sender, CancellationToken ct) =>
+                {
+                    var result = await sender.Send(command, ct);
+                    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
+                }
+            )
+            .RequireRateLimiting("auth-strict");
 
         group.MapPost(
             "/refresh-token",
@@ -43,7 +45,8 @@ public static class AuthEndpoints
                 var result = await sender.Send(command, ct);
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
-        );
+        )
+        .RequireRateLimiting("auth-token");
 
         group
             .MapPatch(
@@ -54,7 +57,8 @@ public static class AuthEndpoints
                     return result.IsSuccess ? Results.NoContent() : result.ToProblemResult();
                 }
             )
-            .RequireAuthorization();
+            .RequireAuthorization()
+            .RequireRateLimiting("auth-strict");
 
         group
             .MapPost(

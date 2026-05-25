@@ -48,10 +48,10 @@ public static class TransactionSql
 
     public const string GetTransactionSummary = """
                                                 SELECT 
-                                                    COALESCE(SUM(amount) FILTER (WHERE type = 'income'), 0)  AS TotalIncome,
-                                                    COALESCE(SUM(amount) FILTER (WHERE type = 'expense'), 0) AS TotalExpense,
-                                                    COALESCE(SUM(amount) FILTER (WHERE type = 'income'), 0) - 
-                                                    COALESCE(SUM(amount) FILTER (WHERE type = 'expense'), 0) AS Balance
+                                                    COALESCE(SUM(amount) FILTER (WHERE type = @IncomeType), 0)  AS TotalIncome,
+                                                    COALESCE(SUM(amount) FILTER (WHERE type = @ExpenseType), 0) AS TotalExpense,
+                                                    COALESCE(SUM(amount) FILTER (WHERE type = @IncomeType), 0) - 
+                                                    COALESCE(SUM(amount) FILTER (WHERE type = @ExpenseType), 0) AS Balance
                                                 FROM finance.transactions
                                                 WHERE user_id = @UserId
                                                   AND transaction_date >= @StartDate

@@ -56,6 +56,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{0617
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.UnitTests", "tests\Modules\Finance\Finance.UnitTests\Finance.UnitTests.csproj", "{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{9969D504-2070-4966-9896-10709C06D787}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", "{31A85880-97F2-409B-B433-A446342E1303}"
+	ProjectSection(SolutionItems) = preProject
+		database\migrations\V1__create_schemas.sql = database\migrations\V1__create_schemas.sql
+		database\migrations\V2__create_auth_tables.sql = database\migrations\V2__create_auth_tables.sql
+		database\migrations\V3__create_finance_accounts_table.sql = database\migrations\V3__create_finance_accounts_table.sql
+		database\migrations\V4__create_catalog_categories_table.sql = database\migrations\V4__create_catalog_categories_table.sql
+		database\migrations\V5__create_recurring_transactions_table.sql = database\migrations\V5__create_recurring_transactions_table.sql
+		database\migrations\V6__create_transactions_table.sql = database\migrations\V6__create_transactions_table.sql
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0EB5918F-33AF-4343-BD9A-E0D836159C05}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
@@ -64,10 +76,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.env.example = .env.example
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{A9B38B3A-60C1-4D5A-9D6C-8B7C5E4A3F21}"
-	ProjectSection(SolutionItems) = preProject
-		scripts\init-db.sql = scripts\init-db.sql
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{30785934-E017-5D9F-2777-3D61460A5281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.IntegrationTests", "tests\IntegrationTests\PersonalFinance.IntegrationTests.csproj", "{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -295,6 +306,18 @@ Global
 		{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}.Release|x64.Build.0 = Release|Any CPU
 		{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}.Release|x86.ActiveCfg = Release|Any CPU
 		{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}.Release|x86.Build.0 = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|x64.Build.0 = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Debug|x86.Build.0 = Debug|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|x64.ActiveCfg = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|x64.Build.0 = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|x86.ActiveCfg = Release|Any CPU
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,5 +348,8 @@ Global
 		{45CA1171-FB6E-4767-A43B-4B9BB615A7C4} = {693E946F-6823-418F-A6F6-9D120B267414}
 		{06170411-A699-B94A-5A25-F3EB5CA598A7} = {D7DC9B74-6BC4-2470-2038-1E57C2DCB73B}
 		{B5558D25-3F7B-4138-BF85-EFEF1737DE8B} = {06170411-A699-B94A-5A25-F3EB5CA598A7}
+		{31A85880-97F2-409B-B433-A446342E1303} = {9969D504-2070-4966-9896-10709C06D787}
+		{30785934-E017-5D9F-2777-3D61460A5281} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E} = {30785934-E017-5D9F-2777-3D61460A5281}
 	EndGlobalSection
 EndGlobal

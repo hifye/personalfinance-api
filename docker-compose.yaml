@@ -22,7 +22,6 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
     networks:
       - backend
@@ -42,6 +41,26 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+      
+  flyway:
+    image: flyway/flyway:11-alpine
+    container_name: personalfinance-flyway
+    
+    depends_on:
+      postgres:
+        condition: service_healthy
+    
+    command: >
+      -url=jdbc:postgresql://postgres:5432/personalfinance
+      -user=postgres
+      -password=${POSTGRES_PASSWORD}
+      migrate
+    
+    volumes:
+      - ./database/migrations:/flyway/sql:ro
+    
+    networks:
+      - backend
 
   api:
     image: personalfinance-api:${TAG}
@@ -57,6 +76,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
 
     environment:
       ASPNETCORE_ENVIRONMENT: Production

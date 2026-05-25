@@ -37,7 +37,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapGet(
             "/get-accounts-user",
@@ -47,17 +48,19 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
-        
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
+
         group.MapPost(
-                "/create-account",
+            "/create-account",
             async (CreateAccountCommand command, ISender sender, CancellationToken ct) =>
             {
                 var result = await sender.Send(command, ct);
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapPatch(
             "/patch-account/{id:guid}",
@@ -68,7 +71,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapDelete(
             "/delete-account/{id:guid}",
@@ -78,7 +82,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapGet(
             "/get-recurring-transaction-details/{id:guid}",
@@ -88,7 +93,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapGet(
             "/get-recurring-transactions-user",
@@ -98,7 +104,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapPost(
             "/create-recurring-transaction",
@@ -108,7 +115,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapPatch(
             "/patch-recurring-transaction/{id:guid}",
@@ -119,7 +127,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapDelete(
             "/delete-recurring-transaction/{id:guid}",
@@ -129,7 +138,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapGet(
             "/get-transaction-details/{id:guid}",
@@ -139,7 +149,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapGet(
             "/get-transactions-user",
@@ -149,7 +160,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapGet(
             "/get-transactions-summary",
@@ -159,7 +171,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapPost(
             "/create-transaction",
@@ -169,7 +182,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapPatch(
                 "/patch-transaction/{id:guid}",
@@ -180,7 +194,8 @@ public static class FinanceEndpoints
                     return result.IsSuccess ? Results.Created() : result.ToProblemResult();
              }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapDelete(
             "/delete-transaction/{id:guid}",
@@ -190,8 +205,8 @@ public static class FinanceEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
-        
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         return app;
     }

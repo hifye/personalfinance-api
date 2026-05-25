@@ -2,6 +2,7 @@ using BuildingBlocks.Application.Abstractions;
 using Dapper;
 using Finance.Application.Abstractions.Queries;
 using Finance.Application.Features.ListItem;
+using Finance.Domain.Enums;
 using Finance.Infrastructure.Persistance.Sql;
 
 namespace Finance.Infrastructure.Persistance.Queries;
@@ -44,6 +45,8 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
                     UserId = userId,
                     StartDate = startDate,
                     EndDate = endDate,
+                    IncomeType = (short)TransactionType.Income,
+                    ExpenseType = (short)TransactionType.Expense
                 }
             )
         )!;

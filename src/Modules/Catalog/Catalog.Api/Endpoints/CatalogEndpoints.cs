@@ -25,7 +25,8 @@ public static class CatalogEndpoints
                 return result.IsSuccess ? Results.Created() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
 
         group.MapDelete(
             "/delete-category/{id:guid}",
@@ -35,7 +36,8 @@ public static class CatalogEndpoints
                 return result.IsSuccess ? Results.NoContent() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
 
         group.MapPatch(
             "/patch-category/{id:guid}",
@@ -46,7 +48,8 @@ public static class CatalogEndpoints
                 return result.IsSuccess ? Results.NoContent() : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("writes");
         
         group.MapGet(
             "/get-category/{id:guid}",
@@ -56,7 +59,8 @@ public static class CatalogEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
         
         group.MapGet(
                 "/get-categories-user", 
@@ -66,7 +70,8 @@ public static class CatalogEndpoints
                 return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemResult();
             }
         )
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .RequireRateLimiting("heavy-reads");
 
         return app;
     }

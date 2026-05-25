@@ -11,7 +11,7 @@ public sealed record Price
     public static Result<Price> Create(decimal value)
     {
         return Guard
-            .AgainstOutOfRange(value < 1, "Price cannot be negative.")
+            .AgainstOutOfRange(value < 0, "Price cannot be negative.")
             .Map(() => new Price(value));
     }
 }
