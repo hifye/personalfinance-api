@@ -5,7 +5,7 @@ on:
     workflows:
       - CI
     branches:
-      - main
+      - master
     types:
       - completed
   workflow_dispatch:
