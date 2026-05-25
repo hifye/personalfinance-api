@@ -35,7 +35,7 @@ public static class DependencyInjection
             .AddJwtBearer(opt =>
             {
                 opt.SaveToken = true;
-                opt.RequireHttpsMetadata = false;
+                opt.RequireHttpsMetadata = true;
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

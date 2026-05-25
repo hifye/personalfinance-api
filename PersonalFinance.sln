@@ -58,6 +58,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.UnitTests", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{9969D504-2070-4966-9896-10709C06D787}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{20022220-2002-2002-2002-200220022002}"
+EndProject
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", "{31A85880-97F2-409B-B433-A446342E1303}"
 	ProjectSection(SolutionItems) = preProject
 		database\migrations\V1__create_schemas.sql = database\migrations\V1__create_schemas.sql
@@ -79,6 +82,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{30785934-E017-5D9F-2777-3D61460A5281}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.IntegrationTests", "tests\IntegrationTests\PersonalFinance.IntegrationTests.csproj", "{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{7B56A18C-0BF2-4FEC-8C26-91BC12465077}"
+    ProjectSection(SolutionItems) = preProject
+        .github\workflows\ci.yml = .github\workflows\ci.yml
+        .github\workflows\deploy.yml = .github\workflows\deploy.yml
+    EndProjectSection
+
+    
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -351,5 +362,6 @@ Global
 		{31A85880-97F2-409B-B433-A446342E1303} = {9969D504-2070-4966-9896-10709C06D787}
 		{30785934-E017-5D9F-2777-3D61460A5281} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E} = {30785934-E017-5D9F-2777-3D61460A5281}
+		{7B56A18C-0BF2-4FEC-8C26-91BC12465077} = {20022220-2002-2002-2002-200220022002}
 	EndGlobalSection
 EndGlobal

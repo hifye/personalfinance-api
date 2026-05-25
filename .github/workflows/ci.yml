@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_VERSION: 10.0.x
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore PersonalFinance.sln
+
+      - name: Build
+        run: dotnet build PersonalFinance.sln --configuration $BUILD_CONFIGURATION --no-restore
+
+      - name: Test
+        run: dotnet test PersonalFinance.sln --configuration $BUILD_CONFIGURATION --no-build --logger trx --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
