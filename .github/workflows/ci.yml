@@ -26,9 +26,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+        shell: bash
+        run: |
+          curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+          chmod +x dotnet-install.sh
+          ./dotnet-install.sh --channel 10.0 --install-dir "$HOME/.dotnet"
+          echo "$HOME/.dotnet" >> "$GITHUB_PATH"
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+          "$HOME/.dotnet/dotnet" --info
 
       - name: Restore
         run: dotnet restore PersonalFinance.sln
