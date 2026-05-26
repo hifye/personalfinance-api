@@ -47,8 +47,8 @@ services:
     container_name: personalfinance-flyway
 
     build:
-      context: .
-      dockerfile: database/Dockerfile
+      context: ./database
+      dockerfile: Dockerfile
     
     depends_on:
       postgres:

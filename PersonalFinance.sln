@@ -54,6 +54,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.Api", "src\Modules\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{06170411-A699-B94A-5A25-F3EB5CA598A7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{21222222-2222-2222-2222-222222222222}"
+	ProjectSection(SolutionItems) = preProject
+		infra\main.tf = infra\main.tf
+		infra\variables.tf = infra\variables.tf
+		infra\output.tf = infra\output.tf
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.UnitTests", "tests\Modules\Finance\Finance.UnitTests\Finance.UnitTests.csproj", "{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{9969D504-2070-4966-9896-10709C06D787}"
@@ -97,6 +104,36 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 				EndProjectSection
 
 				
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{AA33952D-B024-447B-BCB2-54C98A1E6051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "networking", "networking", "{630B291A-850C-447F-B6E9-96895821034A}"
+	ProjectSection(SolutionItems) = preProject
+		infra\modules\networking\main.tf = infra\modules\networking\main.tf
+		infra\modules\networking\output.tf = infra\modules\networking\output.tf
+		infra\modules\networking\variables.tf = infra\modules\networking\variables.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rds", "rds", "{D30B291A-850C-447F-B6E9-96895821034C}"
+	ProjectSection(SolutionItems) = preProject
+		infra\modules\rds\main.tf = infra\modules\rds\main.tf
+		infra\modules\rds\output.tf = infra\modules\rds\output.tf
+		infra\modules\rds\variables.tf = infra\modules\rds\variables.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ecr", "ecr", "{22222225-2222-2222-2222-222222222232}"
+				ProjectSection(SolutionItems) = preProject
+												infra\modules\ecr\main.tf = infra\modules\ecr\main.tf
+												infra\modules\ecr\output.tf = infra\modules\ecr\output.tf
+												infra\modules\ecr\varialbes.tf = infra\modules\ecr\variables.tf
+				EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ecs", "ecs", "{22523425-2222-2222-2222-222222222232}"
+				ProjectSection(SolutionItems) = preProject
+												infra\modules\ecs\main.tf = infra\modules\ecs\main.tf
+												infra\modules\ecs\output.tf = infra\modules\ecs\output.tf
+												infra\modules\ecs\varialbes.tf = infra\modules\ecs\variables.tf
+				EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -370,5 +407,10 @@ Global
 		{30785934-E017-5D9F-2777-3D61460A5281} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{43D0F41D-856C-4C65-9B57-E6E644B7AB3E} = {30785934-E017-5D9F-2777-3D61460A5281}
 		{7B56A18C-0BF2-4FEC-8C26-91BC12465077} = {20022220-2002-2002-2002-200220022002}
+		{AA33952D-B024-447B-BCB2-54C98A1E6051} = {21222222-2222-2222-2222-222222222222}
+		{630B291A-850C-447F-B6E9-96895821034A} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
+		{D30B291A-850C-447F-B6E9-96895821034C} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
+		{22222225-2222-2222-2222-222222222232} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
+		{22523425-2222-2222-2222-222222222232} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
 	EndGlobalSection
 EndGlobal

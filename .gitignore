@@ -1,6 +1,7 @@
 # Build artifacts
 bin/
 obj/
+/infra/.terraform
 
 # Rider / JetBrains
 .idea/
@@ -75,6 +76,8 @@ packages/
 #######################################
 secrets.json
 .env
+.env.rds
+docker-compose.override.yml
 
 #######################################
 # Rider HTTP scratch files
