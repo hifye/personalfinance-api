@@ -1,0 +1,14 @@
+services:
+  flyway:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    
+    environment:
+      FLYWAY_URL: ${FLYWAY_URL}
+      FLYWAY_USER: ${FLYWAY_USER}
+      FLYWAY_PASSWORD: ${FLYWAY_PASSWORD}
+      FLYWAY_BASELINE_ON_MIGRATE: "true"
+    
+    volumes:
+      - ./database/migrations:/flyway/sql:ro

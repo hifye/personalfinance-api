@@ -57,10 +57,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance.UnitTests", "tests\Modules\Finance\Finance.UnitTests\Finance.UnitTests.csproj", "{B5558D25-3F7B-4138-BF85-EFEF1737DE8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{9969D504-2070-4966-9896-10709C06D787}"
-    ProjectSection(SolutionItems) = preProject
-        database\Dockerfile = database\Dockerfile
-    EndProjectSection
-   
+				ProjectSection(SolutionItems) = preProject
+								database\Dockerfile = database\Dockerfile
+				EndProjectSection
+			
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{20022220-2002-2002-2002-200220022002}"
 EndProject
@@ -80,6 +80,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.env = .env
 		docker-compose.override.yml = docker-compose.override.yml
 		.env.example = .env.example
+		docker-compose.rds.yml = docker-compose.rds.yml
+		.env.rds.example = .env.rds.example
+		.env.rds = .env.rds
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{30785934-E017-5D9F-2777-3D61460A5281}"
@@ -87,13 +90,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.IntegrationTests", "tests\IntegrationTests\PersonalFinance.IntegrationTests.csproj", "{43D0F41D-856C-4C65-9B57-E6E644B7AB3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{7B56A18C-0BF2-4FEC-8C26-91BC12465077}"
-    ProjectSection(SolutionItems) = preProject
-        .github\workflows\ci.yml = .github\workflows\ci.yml
-        .github\workflows\deploy.yml = .github\workflows\deploy.yml
-        .github\workflows\migrations-image.yml = .github\workflows\migrations-image.yml
-    EndProjectSection
+				ProjectSection(SolutionItems) = preProject
+								.github\workflows\ci.yml = .github\workflows\ci.yml
+								.github\workflows\deploy.yml = .github\workflows\deploy.yml
+								.github\workflows\migrations-image.yml = .github\workflows\migrations-image.yml
+				EndProjectSection
 
-    
+				
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

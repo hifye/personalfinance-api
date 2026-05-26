@@ -1,8 +1,16 @@
-FROM flyway/flyway:11-alpine
+FROM gradle:8.10-jdk21
 
-LABEL org.opencontainers.image.title="PersonalFinance database migrations"
-LABEL org.opencontainers.image.description="Flyway image containing the PersonalFinance database migrations."
+# Download Flyway CLI (versão 11)
+RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.0.0/flyway-commandline-11.0.0-linux-x64.tar.gz | tar xz && \
+    mv flyway-11.0.0 /flyway && \
+    rm -rf /app
 
-COPY database/migrations /flyway/sql
+# Download PostgreSQL JDBC driver (latest)
+RUN mkdir -p /flyway/drivers && \
+    curl -o /flyway/drivers/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
-CMD ["migrate"]
+COPY migrations /flyway/sql
+
+ENV PATH="/flyway:$PATH"
+
+ENTRYPOINT ["flyway", "-baselineOnMigrate=true", "migrate"]
