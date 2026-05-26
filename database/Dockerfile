@@ -5,4 +5,4 @@ LABEL org.opencontainers.image.description="Flyway image containing the Personal
 
 COPY database/migrations /flyway/sql
 
-CMD ["info"]
+CMD ["migrate"]
