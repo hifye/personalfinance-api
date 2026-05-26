@@ -43,21 +43,23 @@ services:
       start_period: 30s
       
   flyway:
-    image: flyway/flyway:11-alpine
+    image: personalfinance-migrations:${TAG}
     container_name: personalfinance-flyway
+
+    build:
+      context: .
+      dockerfile: database/Dockerfile
     
     depends_on:
       postgres:
         condition: service_healthy
     
-    command: >
-      -url=jdbc:postgresql://postgres:5432/personalfinance
-      -user=postgres
-      -password=${POSTGRES_PASSWORD}
-      migrate
-    
-    volumes:
-      - ./database/migrations:/flyway/sql:ro
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/personalfinance
+      FLYWAY_USER: postgres
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+
+    command: migrate
     
     networks:
       - backend

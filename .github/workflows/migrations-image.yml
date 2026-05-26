@@ -1,0 +1,60 @@
+name: Migrations Image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - database/Dockerfile
+      - database/migrations/**
+      - .github/workflows/migrations-image.yml
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  MIGRATIONS_ECR_REPOSITORY: ${{ vars.MIGRATIONS_ECR_REPOSITORY }}
+
+jobs:
+  build-and-push:
+    name: Build and push migrations image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate configuration
+        run: |
+          test -n "$AWS_REGION" || (echo "AWS_REGION repository variable is required" && exit 1)
+          test -n "$MIGRATIONS_ECR_REPOSITORY" || (echo "MIGRATIONS_ECR_REPOSITORY repository variable is required" && exit 1)
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push migrations image
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          IMAGE_URI="$ECR_REGISTRY/$MIGRATIONS_ECR_REPOSITORY:$IMAGE_TAG"
+          LATEST_IMAGE_URI="$ECR_REGISTRY/$MIGRATIONS_ECR_REPOSITORY:latest"
+
+          docker build \
+            --file database/Dockerfile \
+            --tag "$IMAGE_URI" \
+            --tag "$LATEST_IMAGE_URI" \
+            .
+
+          docker push "$IMAGE_URI"
+          docker push "$LATEST_IMAGE_URI"
