@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
-      <ProjectReference Include="..\..\Catalog\Catalog.Application\Catalog.Application.csproj" />
       <ProjectReference Include="..\Finance.Domain\Finance.Domain.csproj" />
     </ItemGroup>
 

@@ -1,6 +1,5 @@
 using Catalog.Application.Features.Commands.DeleteCategory;
 using FluentAssertions;
-using Xunit;
 
 namespace Catalog.UnitTests.Commands.DeleteCategory;
 

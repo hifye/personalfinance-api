@@ -1,5 +1,5 @@
 using BuildingBlocks.Application.Abstractions;
-using Catalog.Application.Contracts;
+using BuildingBlocks.Contracts;
 using Finance.Application.Abstractions.Persistance;
 using Finance.Application.Features.Commands.RecurringTransaction.CreateRecurringTransaction;
 using Finance.Domain.Enums;
@@ -7,7 +7,6 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using SharedKernel.Common;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.CreateRecurringTransaction;
 

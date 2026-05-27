@@ -1,6 +1,5 @@
 using Finance.Application.Features.Commands.RecurringTransaction.PatchRecurringTransaction;
 using FluentValidation.TestHelper;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.PatchRecurringTransaction;
 

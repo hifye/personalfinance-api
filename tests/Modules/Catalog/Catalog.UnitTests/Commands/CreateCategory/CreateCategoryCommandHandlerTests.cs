@@ -4,8 +4,6 @@ using Catalog.Application.Features.Commands.CreateCategory;
 using Catalog.Domain.Enums;
 using FluentAssertions;
 using NSubstitute;
-using SharedKernel.Common;
-using Xunit;
 
 namespace Catalog.UnitTests.Commands.CreateCategory;
 

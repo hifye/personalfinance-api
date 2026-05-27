@@ -2,12 +2,8 @@
 bin/
 obj/
 .terraform
-.tfstate
-.tfstate.backup
-.tfvars
-.tfvars.json
-override.tf
-override.tf.json
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
 
 # Rider / JetBrains
 .idea/

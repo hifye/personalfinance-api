@@ -3,8 +3,6 @@ using Auth.Application.Features.Authentication.Logout;
 using BuildingBlocks.Application.Abstractions;
 using FluentAssertions;
 using NSubstitute;
-using SharedKernel.Common;
-using Xunit;
 
 namespace Auth.UnitTests.Authentication.Logout;
 

@@ -1,7 +1,6 @@
 using Finance.Application.Features.Commands.Transaction.PatchTransaction;
 using Finance.Domain.Enums;
 using FluentValidation.TestHelper;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.PatchTransaction;
 

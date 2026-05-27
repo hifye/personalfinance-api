@@ -1,7 +1,6 @@
 using Catalog.Application.Features.Commands.PatchCategory;
 using Catalog.Domain.Enums;
 using FluentAssertions;
-using Xunit;
 
 namespace Catalog.UnitTests.Commands.PatchCategory;
 

@@ -6,9 +6,7 @@ using BuildingBlocks.Application.Abstractions;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using SharedKernel.Common;
 using SharedKernel.ValueObjects;
-using Xunit;
 
 namespace Auth.UnitTests.Registration;
 

@@ -1,6 +1,5 @@
 using Finance.Application.Features.Commands.RecurringTransaction.DeleteRecurringTransaction;
 using FluentValidation.TestHelper;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.RecurringTransaction.DeleteRecurringTransaction;
 

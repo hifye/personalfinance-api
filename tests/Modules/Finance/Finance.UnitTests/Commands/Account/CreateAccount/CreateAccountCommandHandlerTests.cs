@@ -4,8 +4,6 @@ using Finance.Application.Features.Commands.Account.CreateAccount;
 using Finance.Domain.Enums;
 using FluentAssertions;
 using NSubstitute;
-using SharedKernel.Common;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.CreateAccount;
 

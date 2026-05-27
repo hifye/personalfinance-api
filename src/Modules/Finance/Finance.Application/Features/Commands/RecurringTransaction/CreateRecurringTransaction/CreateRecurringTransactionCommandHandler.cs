@@ -1,6 +1,5 @@
 using BuildingBlocks.Application.Abstractions;
-using Catalog.Application.Abstractions.Persistance;
-using Catalog.Application.Contracts;
+using BuildingBlocks.Contracts;
 using Finance.Application.Abstractions.Persistance;
 using MediatR;
 using Microsoft.Extensions.Logging;

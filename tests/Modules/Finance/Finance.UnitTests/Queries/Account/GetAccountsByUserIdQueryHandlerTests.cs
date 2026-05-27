@@ -7,7 +7,6 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using SharedKernel.Common;
-using Xunit;
 
 namespace Finance.UnitTests.Queries.Account;
 

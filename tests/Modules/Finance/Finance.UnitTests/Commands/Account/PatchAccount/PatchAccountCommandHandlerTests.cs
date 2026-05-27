@@ -6,7 +6,6 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using SharedKernel.Common;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.PatchAccount;
 
@@ -74,7 +73,7 @@ public sealed class PatchAccountCommandHandlerTests
         // Arrange
         var accountId = Guid.NewGuid();
         var account = Finance.Domain.Entities.Account.Create(Guid.NewGuid(), "Old Name", AccountType.Checking, 100m).Value;
-        // Ambos nulos para forçar falha na regra de domínio do Patch (pelo menos um campo deve ser fornecido)
+        // Ambos nulos para forï¿½ar falha na regra de domï¿½nio do Patch (pelo menos um campo deve ser fornecido)
         var command = new PatchAccountCommand(accountId, null, null);
 
         _accountRepositoryMock.GetAccountById(accountId).Returns(account);

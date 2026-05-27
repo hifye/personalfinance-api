@@ -1,6 +1,5 @@
 using Finance.Application.Features.Commands.Account.DeleteAccount;
 using FluentValidation.TestHelper;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.Account.DeleteAccount;
 

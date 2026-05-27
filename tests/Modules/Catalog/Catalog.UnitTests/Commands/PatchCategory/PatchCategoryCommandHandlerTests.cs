@@ -6,7 +6,6 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using SharedKernel.Common;
-using Xunit;
 
 namespace Catalog.UnitTests.Commands.PatchCategory;
 

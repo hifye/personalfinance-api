@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Abstractions.Persistance;
+﻿using BuildingBlocks.Contracts;
+using Catalog.Application.Abstractions.Persistance;
 
 namespace Catalog.Application.Contracts;
 

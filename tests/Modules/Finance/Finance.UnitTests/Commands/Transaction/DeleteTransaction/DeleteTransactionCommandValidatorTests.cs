@@ -1,6 +1,5 @@
 using Finance.Application.Features.Commands.Transaction.DeleteTransaction;
 using FluentValidation.TestHelper;
-using Xunit;
 
 namespace Finance.UnitTests.Commands.Transaction.DeleteTransaction;
 

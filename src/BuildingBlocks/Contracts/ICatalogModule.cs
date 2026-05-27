@@ -1,4 +1,4 @@
-﻿namespace Catalog.Application.Contracts;
+﻿namespace BuildingBlocks.Contracts;
 
 public interface ICatalogModule
 {
