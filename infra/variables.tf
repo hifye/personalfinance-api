@@ -1,15 +1,16 @@
 ﻿variable "aws_region" {
-  description = "Região da AWS"
-  type = string
+  type    = string
   default = "sa-east-1"
 }
 variable "project_name" {
-  description = "Nome do projeto"
-  type = string
+  type    = string
   default = "personal-finance"
 }
 variable "db_password" {
-  description = "Senha mestre do RDS"
-  type = string
+  type      = string
+  sensitive = true
+}
+variable "jwt_key" {
+  type      = string
   sensitive = true
 }

@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "migrations" {
     environment = [
       { name = "FLYWAY_URL",      value = "jdbc:postgresql://${var.db_host}:5432/personalfinance" },
       { name = "FLYWAY_USER",     value = "postgres" },
-      { name = "FLYWAY_PASSWORD", value = var.db_password }
+      { name = "FLYWAY_PASSWORD", value = var.db_password_secret_arn }
     ]
     logConfiguration = {
       logDriver = "awslogs"
@@ -92,10 +92,26 @@ resource "aws_ecs_task_definition" "api" {
     image     = "${var.api_repository_url}:latest"
     essential = true
     portMappings = [{ containerPort = 8080, hostPort = 8080 }]
+
     environment = [
-      { name = "ConnectionStrings__DefaultConnection", value = "Host=${var.db_host};Database=personalfinance;Username=postgres;Password=${var.db_password}" },
-      { name = "ASPNETCORE_ENVIRONMENT",               value = "Production" }
+      { name = "ASPNETCORE_ENVIRONMENT",                value = "Production" },
+      { name = "JWT__Issuer",                           value = var.jwt_issuer },
+      { name = "JWT__Audience",                         value = var.jwt_audience },
+      { name = "JWT__AccessTokenExpirationMinutes",     value = tostring(var.jwt_access_expiry) },
+      { name = "JWT__RefreshTokenExpirationDays",       value = tostring(var.jwt_refresh_expiry) }
     ]
+
+    secrets = [
+      {
+        name      = "ConnectionStrings__DefaultConnection"
+        valueFrom = var.connection_string_secret_arn
+      },
+      {
+        name      = "JWT__Key"
+        valueFrom = var.jwt_key_secret_arn
+      }
+    ]
+
     logConfiguration = {
       logDriver = "awslogs"
       options = {
@@ -122,3 +138,20 @@ resource "aws_ecs_service" "api" {
   }
 }
 
+# 9. Política para ler secrets
+resource "aws_iam_role_policy" "secrets_policy" {
+  name = "${var.project_name}-secrets-policy"
+  role = aws_iam_role.ecs_task_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["secretsmanager:GetSecretValue"]
+      Resource = [
+        var.connection_string_secret_arn,
+        var.jwt_key_secret_arn
+      ]
+    }]
+  })
+}

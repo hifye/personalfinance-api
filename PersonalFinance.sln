@@ -135,6 +135,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ecs", "ecs", "{22523425-222
 												infra\modules\ecs\varialbes.tf = infra\modules\ecs\variables.tf
 				EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secrets", "secrets", "{86523425-2222-2222-2222-222222222232}"
+				ProjectSection(SolutionItems) = preProject
+												infra\modules\secrets\main.tf = infra\modules\secrets\main.tf
+												infra\modules\secrets\output.tf = infra\modules\secrets\output.tf
+												infra\modules\secrets\varialbes.tf = infra\modules\secrets\variables.tf
+				EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -412,5 +419,6 @@ Global
 		{D30B291A-850C-447F-B6E9-96895821034C} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
 		{22222225-2222-2222-2222-222222222232} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
 		{22523425-2222-2222-2222-222222222232} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
+		{86523425-2222-2222-2222-222222222232} = {AA33952D-B024-447B-BCB2-54C98A1E6051}
 	EndGlobalSection
 EndGlobal

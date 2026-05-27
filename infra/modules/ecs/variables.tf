@@ -1,12 +1,14 @@
-variable "project_name" { type = string }
-variable "vpc_id"       { type = string }
-variable "subnet_ids"   { type = list(string) }
-variable "region"       { type = string }
-
-# URLs dos repositórios no módulo ECR
-variable "api_repository_url"        { type = string }
-variable "migrations_repository_url" { type = string }
-
-# Informações do banco para passar para os containers
-variable "db_host"     { type = string }
-variable "db_password" { type = string }
+variable "project_name"                { type = string }
+variable "vpc_id"                      { type = string }
+variable "subnet_ids"                  { type = list(string) }
+variable "region"                      { type = string }
+variable "api_repository_url"          { type = string }
+variable "migrations_repository_url"   { type = string }
+variable "db_host"                     { type = string }
+variable "connection_string_secret_arn" { type = string }
+variable "jwt_key_secret_arn"          { type = string }
+variable "jwt_issuer"                  { type = string }
+variable "jwt_audience"                { type = string }
+variable "jwt_access_expiry"           { type = number }
+variable "jwt_refresh_expiry"          { type = number }
+variable "db_password_secret_arn" { type = string }

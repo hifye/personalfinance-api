@@ -20,6 +20,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 Log.Logger = new LoggerConfiguration()
@@ -71,7 +72,7 @@ try
         opt.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 
         opt.AddPolicy("auth-strict", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            GetClientPartitionKey(httpContext), _ => new FixedWindowRateLimiterOptions
+            GetClientIp(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 5,
                 Window = TimeSpan.FromMinutes(1),
@@ -81,7 +82,7 @@ try
         ));
 
         opt.AddPolicy("auth-token", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            GetClientPartitionKey(httpContext), _ => new FixedWindowRateLimiterOptions
+            GetClientIp(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 5,
                 Window = TimeSpan.FromMinutes(1),
@@ -91,7 +92,7 @@ try
         ));
 
         opt.AddPolicy("writes", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            GetClientPartitionKey(httpContext), _ => new FixedWindowRateLimiterOptions
+            GetAuthenticatedClientKey(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 30,
                 Window = TimeSpan.FromMinutes(1),
@@ -101,7 +102,7 @@ try
         ));
 
         opt.AddPolicy("heavy-reads", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            GetClientPartitionKey(httpContext), _ => new FixedWindowRateLimiterOptions
+            GetAuthenticatedClientKey(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 60,
                 Window = TimeSpan.FromMinutes(1),
@@ -111,7 +112,7 @@ try
         ));
 
         opt.AddPolicy("general-authenticated", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            GetClientPartitionKey(httpContext), _ => new FixedWindowRateLimiterOptions
+            GetAuthenticatedClientKey(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 120,
                 Window = TimeSpan.FromMinutes(1),
@@ -121,8 +122,7 @@ try
         ));
 
         opt.AddPolicy("health", httpContext => RateLimitPartition.GetFixedWindowLimiter(
-            httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown-ip",
-            _ => new FixedWindowRateLimiterOptions
+            GetClientIp(httpContext), _ => new FixedWindowRateLimiterOptions
             {
                 PermitLimit = 30,
                 Window = TimeSpan.FromMinutes(1),
@@ -132,19 +132,25 @@ try
         ));
     });
 
-    static string GetClientPartitionKey(HttpContext context)
+    static string GetClientIp(HttpContext context)
     {
-        return context.Connection.RemoteIpAddress?.ToString() ?? "unknown-ip";
+        var forwarded = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+        if (!string.IsNullOrEmpty(forwarded))
+        {
+            var clientIp = forwarded.Split(',')[0].Trim();
+            return clientIp;
+        }
+
+        return context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
     }
 
-    static string GetUserOrClientPartitionKey(HttpContext context)
+    static string GetAuthenticatedClientKey(HttpContext context)
     {
-        var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier)
-                     ?? context.User.FindFirstValue("sub");
+        var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!string.IsNullOrEmpty(userId))
+            return $"user:{userId}";
 
-        return userId is not null
-            ? $"user:{userId}"
-            : $"client:{GetClientPartitionKey(context)}";
+        return $"ip:{GetClientIp(context)}";
     }
 
     builder.Services.AddHealthChecks()
@@ -178,6 +184,11 @@ try
     builder.Services.AddAuthorization();
 
     var app = builder.Build();
+
+    app.UseForwardedHeaders(new ForwardedHeadersOptions()
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
 
     if (app.Environment.IsDevelopment())
         app.MapOpenApi();
