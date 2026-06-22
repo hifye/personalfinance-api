@@ -67,6 +67,16 @@ try
         );
     });
 
+    builder.Services.AddCors(opt =>
+    {
+        opt.AddDefaultPolicy(policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+    });
+
     builder.Services.AddRateLimiter(opt =>
     {
         opt.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -208,6 +218,8 @@ try
     app.UseCorrelationId();
 
     app.UseExceptionHandler("/error");
+
+    app.UseCors();
 
     app.UseRateLimiter();
 
