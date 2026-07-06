@@ -9,12 +9,12 @@ namespace Finance.Infrastructure.Persistance.Repositories;
 public sealed class AccountRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
     : IAccountRepository
 {
-    public async Task<Account?> GetAccountById(Guid id)
+    public async Task<Account?> GetAccountById(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<Account>(
             AccountSql.GetAccountById,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
     }
 
@@ -55,12 +55,12 @@ public sealed class AccountRepository(IUnitOfWork unitOfWork, IDbConnectionFacto
     }
 
 
-    public async Task<bool> DeleteAccount(Guid id)
+    public async Task<bool> DeleteAccount(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.ExecuteAsync(
             AccountSql.DeleteAccount,
-            new { Id = id },
+            new { Id = id, UserId = userId },
             transaction: unitOfWork.Transaction
         ) > 0;
     }

@@ -5,9 +5,9 @@ namespace Catalog.Application.Contracts;
 
 internal sealed class CatalogModule(ICatalogRepository categoryRepository) : ICatalogModule
 {
-    public async Task<bool> CategoryExistsAsync(Guid categoryId, CancellationToken ct = default)
+    public async Task<bool> CategoryExistsAsync(Guid categoryId, Guid userId, CancellationToken ct)
     {
-        var category = await categoryRepository.GetCategoryById(categoryId);
+        var category = await categoryRepository.GetCategoryById(categoryId, userId);
         return category is not null;
     }
 }

@@ -9,12 +9,12 @@ namespace Finance.Infrastructure.Persistance.Repositories;
 public sealed class TransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
     : ITransactionRepository
 {
-    public async Task<Transaction?> GetTransactionById(Guid id)
+    public async Task<Transaction?> GetTransactionById(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<Transaction>(
             TransactionSql.GetTransactionById,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
     }
 
@@ -59,10 +59,10 @@ public sealed class TransactionRepository(IUnitOfWork unitOfWork, IDbConnectionF
     }
 
 
-    public async Task<bool> DeleteTransaction(Guid id)
+    public async Task<bool> DeleteTransaction(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
-        return await connection.ExecuteAsync(TransactionSql.DeleteTransaction, new { Id = id },
+        return await connection.ExecuteAsync(TransactionSql.DeleteTransaction, new { Id = id, UserId = userId },
             transaction: unitOfWork.Transaction) > 0;
     }
 }

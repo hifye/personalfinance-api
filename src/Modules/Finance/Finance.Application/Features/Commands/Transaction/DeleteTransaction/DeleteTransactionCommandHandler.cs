@@ -5,19 +5,23 @@ using Microsoft.Extensions.Logging;
 using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Transaction.DeleteTransaction;
-    
-public sealed class DeleteTransactionCommandHandler(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, ILogger<DeleteTransactionCommandHandler> logger)
+
+public sealed class DeleteTransactionCommandHandler(
+    ICurrentUser currentUser,
+    ITransactionRepository transactionRepository,
+    IUnitOfWork unitOfWork,
+    ILogger<DeleteTransactionCommandHandler> logger)
     : IRequestHandler<DeleteTransactionCommand, Result>
 {
     public async Task<Result> Handle(DeleteTransactionCommand command, CancellationToken cancellationToken)
     {
-        var deleted = await transactionRepository.DeleteTransaction(command.Id);
+        var deleted = await transactionRepository.DeleteTransaction(command.Id, currentUser.UserId);
         if (!deleted)
         {
             logger.LogWarning("Transaction with ID {TransactionId} not found", command.Id);
             return Result.Failure("Transaction not found.", ErrorType.NotFound);
         }
-            
+
         await unitOfWork.CommitAsync();
         return Result.Success();
     }

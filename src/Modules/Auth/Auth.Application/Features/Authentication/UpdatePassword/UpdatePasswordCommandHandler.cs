@@ -5,14 +5,15 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SharedKernel.Common;
 
-namespace Auth.Application.Features.Authentication.PatchPassword;
+namespace Auth.Application.Features.Authentication.UpdatePassword;
 
-public sealed class PatchPasswordCommandHandler(
+public sealed class UpdatePasswordCommandHandler(
     IUserRepository userRepository,
     IUnitOfWork unitOfWork,
     IPasswordHasher passwordHasher,
     ICurrentUser currentUser,
-    ILogger<PatchPasswordCommandHandler> logger)
+    IRefreshTokenRepository refreshTokenRepository,
+    ILogger<UpdatePasswordCommandHandler> logger)
     : IRequestHandler<UpdatePasswordCommand, Result>
 {
     public async Task<Result> Handle(UpdatePasswordCommand command, CancellationToken cancellationToken)
@@ -24,7 +25,13 @@ public sealed class PatchPasswordCommandHandler(
             return Result.Failure("User not found", ErrorType.NotFound);
         }
 
-        var hash = passwordHasher.HashPassword(command.Password);
+        if (!passwordHasher.VerifyPassword(user.PasswordHash, command.CurrentPassword))
+        {
+            logger.LogWarning("Current password is incorrect for user {UserId}", currentUser.UserId);
+            return Result.Failure("Current password is incorrect", ErrorType.Validation);
+        }
+
+        var hash = passwordHasher.HashPassword(command.NewPassword);
 
         var result = user.UpdatePassword(hash);
         if (result.IsFailure)
@@ -35,6 +42,8 @@ public sealed class PatchPasswordCommandHandler(
 
         await userRepository.UpdateUser(user);
         await unitOfWork.CommitAsync();
+
+        await refreshTokenRepository.RevokeAllUserTokens(currentUser.UserId, cancellationToken);
         return Result.Success();
     }
 }

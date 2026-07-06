@@ -6,18 +6,22 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Account.DeleteAccount;
 
-public sealed class DeleteAccountCommandHandler(IAccountRepository accountRepository, IUnitOfWork unitOfWork, ILogger<DeleteAccountCommandHandler> logger)
+public sealed class DeleteAccountCommandHandler(
+    ICurrentUser currentUser,
+    IAccountRepository accountRepository,
+    IUnitOfWork unitOfWork,
+    ILogger<DeleteAccountCommandHandler> logger)
     : IRequestHandler<DeleteAccountCommand, Result>
 {
     public async Task<Result> Handle(DeleteAccountCommand command, CancellationToken cancellationToken)
     {
-        var deleted = await accountRepository.DeleteAccount(command.Id);
+        var deleted = await accountRepository.DeleteAccount(command.Id, currentUser.UserId);
         if (!deleted)
         {
             logger.LogWarning("Account with ID {AccountId} not found", command.Id);
             return Result.Failure("Account not found.", ErrorType.NotFound);
         }
-        
+
         await unitOfWork.CommitAsync();
         return Result.Success();
     }

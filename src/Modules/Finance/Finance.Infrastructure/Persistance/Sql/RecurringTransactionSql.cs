@@ -16,7 +16,7 @@ public static class RecurringTransactionSql
                                                              is_active              AS IsActive,
                                                              created_at             AS CreatedAt
                                                       FROM finance.recurring_transactions
-                                                      WHERE id = @Id
+                                                      WHERE id = @Id AND user_id = @UserId
                                                       """;
 
     public const string GetRecurringTransactionDetails = """
@@ -33,7 +33,7 @@ public static class RecurringTransactionSql
                                                                 is_active                 AS IsActive,
                                                                 created_at                AS CreatedAt
                                                          FROM finance.recurring_transactions
-                                                         WHERE id = @Id
+                                                         WHERE id = @Id AND user_id = @UserId
                                                          """;
 
     public const string GetRecurringTransactionsByUserId = """
@@ -88,13 +88,12 @@ public static class RecurringTransactionSql
                                                         description = @Description,
                                                         frequency = @Frequency,
                                                         is_active = @IsActive
-                                                     WHERE id = @Id
+                                                     WHERE id = @Id AND user_id = @UserId
                                                      """;
 
     public const string DeleteRecurringTransaction = """
                                                      UPDATE finance.recurring_transactions
                                                      SET is_active = false
-                                                     WHERE id = @Id
+                                                     WHERE id = @Id AND user_id = @UserId
                                                      """;
 }
-

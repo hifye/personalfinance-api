@@ -10,13 +10,15 @@ namespace Finance.UnitTests.Commands.RecurringTransaction.DeleteRecurringTransac
 
 public sealed class DeleteRecurringTransactionCommandHandlerTests
 {
+    private readonly ICurrentUser _currentUserMock;
+    private readonly DeleteRecurringTransactionCommandHandler _handler;
+    private readonly ILogger<DeleteRecurringTransactionCommandHandler> _loggerMock;
     private readonly IRecurringTransactionRepository _recurringTransactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
-    private readonly ILogger<DeleteRecurringTransactionCommandHandler> _loggerMock;
-    private readonly DeleteRecurringTransactionCommandHandler _handler;
 
     public DeleteRecurringTransactionCommandHandlerTests()
     {
+        _currentUserMock = Substitute.For<ICurrentUser>();
         _recurringTransactionRepositoryMock = Substitute.For<IRecurringTransactionRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
         _loggerMock = Substitute.For<ILogger<DeleteRecurringTransactionCommandHandler>>();
@@ -24,6 +26,7 @@ public sealed class DeleteRecurringTransactionCommandHandlerTests
         _handler = new DeleteRecurringTransactionCommandHandler(
             _recurringTransactionRepositoryMock,
             _unitOfWorkMock,
+            _currentUserMock,
             _loggerMock);
     }
 
@@ -31,16 +34,19 @@ public sealed class DeleteRecurringTransactionCommandHandlerTests
     public async Task Handle_ShouldReturnSuccess_WhenRecurringTransactionIsDeleted()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var id = Guid.NewGuid();
         var command = new DeleteRecurringTransactionCommand(id);
-        _recurringTransactionRepositoryMock.DeleteRecurringTransaction(id).Returns(true);
+
+        _currentUserMock.UserId.Returns(userId);
+        _recurringTransactionRepositoryMock.DeleteRecurringTransaction(id, userId).Returns(true);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        await _recurringTransactionRepositoryMock.Received(1).DeleteRecurringTransaction(id);
+        await _recurringTransactionRepositoryMock.Received(1).DeleteRecurringTransaction(id, userId);
         await _unitOfWorkMock.Received(1).CommitAsync();
     }
 
@@ -48,9 +54,12 @@ public sealed class DeleteRecurringTransactionCommandHandlerTests
     public async Task Handle_ShouldReturnFailure_WhenRecurringTransactionNotFound()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var id = Guid.NewGuid();
         var command = new DeleteRecurringTransactionCommand(id);
-        _recurringTransactionRepositoryMock.DeleteRecurringTransaction(id).Returns(false);
+
+        _currentUserMock.UserId.Returns(userId);
+        _recurringTransactionRepositoryMock.DeleteRecurringTransaction(id, userId).Returns(false);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -60,5 +69,27 @@ public sealed class DeleteRecurringTransactionCommandHandlerTests
         result.Error.Should().Be("Recurring Transaction not found.");
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
-}
 
+    [Fact]
+    public async Task Handle_ShouldReturnNotFound_WhenRecurringTransactionBelongsToAnotherUser()
+    {
+        // Arrange
+        var userAId = Guid.NewGuid();
+        var userBId = Guid.NewGuid();
+        var id = Guid.NewGuid();
+        var command = new DeleteRecurringTransactionCommand(id);
+
+        _currentUserMock.UserId.Returns(userBId);
+        _recurringTransactionRepositoryMock.DeleteRecurringTransaction(id, userBId).Returns(false);
+
+        // Act
+        var result = await _handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.ErrorType.Should().Be(ErrorType.NotFound);
+        await _recurringTransactionRepositoryMock.Received(1).DeleteRecurringTransaction(id, userBId);
+        await _recurringTransactionRepositoryMock.DidNotReceive().DeleteRecurringTransaction(id, userAId);
+        await _unitOfWorkMock.DidNotReceive().CommitAsync();
+    }
+}

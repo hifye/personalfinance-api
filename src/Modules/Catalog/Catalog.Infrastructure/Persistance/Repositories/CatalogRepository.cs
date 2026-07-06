@@ -5,14 +5,15 @@ using Dapper;
 
 namespace Catalog.Infrastructure.Persistance.Repositories;
 
-public sealed class CatalogRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory) : ICatalogRepository
+public sealed class CatalogRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
+    : ICatalogRepository
 {
-    public async Task<Domain.Entities.Catalog?> GetCategoryById(Guid id)
+    public async Task<Domain.Entities.Catalog?> GetCategoryById(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<Domain.Entities.Catalog>(
             CatalogSql.GetCategoryById,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
     }
 
@@ -52,12 +53,12 @@ public sealed class CatalogRepository(IUnitOfWork unitOfWork, IDbConnectionFacto
     }
 
 
-    public async Task<bool> DeleteCategory(Guid id)
+    public async Task<bool> DeleteCategory(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.ExecuteAsync(
             CatalogSql.DeleteCategory,
-            new { Id = id },
+            new { Id = id, UserId = userId },
             transaction: unitOfWork.Transaction
         ) > 0;
     }

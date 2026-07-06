@@ -11,18 +11,21 @@ namespace Finance.UnitTests.Commands.Transaction.PatchTransaction;
 
 public sealed class PatchTransactionCommandHandlerTests
 {
+    private readonly ICurrentUser _currentUserMock;
+    private readonly PatchTransactionCommandHandler _handler;
+    private readonly ILogger<PatchTransactionCommandHandler> _loggerMock;
     private readonly ITransactionRepository _transactionRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
-    private readonly ILogger<PatchTransactionCommandHandler> _loggerMock;
-    private readonly PatchTransactionCommandHandler _handler;
 
     public PatchTransactionCommandHandlerTests()
     {
+        _currentUserMock = Substitute.For<ICurrentUser>();
         _transactionRepositoryMock = Substitute.For<ITransactionRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
         _loggerMock = Substitute.For<ILogger<PatchTransactionCommandHandler>>();
 
         _handler = new PatchTransactionCommandHandler(
+            _currentUserMock,
             _transactionRepositoryMock,
             _unitOfWorkMock,
             _loggerMock);
@@ -32,11 +35,14 @@ public sealed class PatchTransactionCommandHandlerTests
     public async Task Handle_ShouldReturnSuccess_WhenTransactionIsPatched()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var transactionId = Guid.NewGuid();
-        var transaction = Finance.Domain.Entities.Transaction.Create(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), null, 100m, TransactionType.Expense, "Old Description").Value;
+        var transaction = Finance.Domain.Entities.Transaction.Create(userId, Guid.NewGuid(), Guid.NewGuid(), null, 100m,
+            TransactionType.Expense, "Old Description").Value;
         var command = new PatchTransactionCommand(transactionId, TransactionType.Income, "New Description");
 
-        _transactionRepositoryMock.GetTransactionById(transactionId).Returns(transaction);
+        _currentUserMock.UserId.Returns(userId);
+        _transactionRepositoryMock.GetTransactionById(transactionId, userId).Returns(transaction);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -53,10 +59,13 @@ public sealed class PatchTransactionCommandHandlerTests
     public async Task Handle_ShouldReturnFailure_WhenTransactionNotFound()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var transactionId = Guid.NewGuid();
         var command = new PatchTransactionCommand(transactionId, TransactionType.Income, "New Description");
 
-        _transactionRepositoryMock.GetTransactionById(transactionId).Returns((Finance.Domain.Entities.Transaction?)null);
+        _currentUserMock.UserId.Returns(userId);
+        _transactionRepositoryMock.GetTransactionById(transactionId, userId)
+            .Returns((Finance.Domain.Entities.Transaction?)null);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -66,5 +75,30 @@ public sealed class PatchTransactionCommandHandlerTests
         result.Error.Should().Be("Transaction not found.");
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
-}
 
+    [Fact]
+    public async Task Handle_ShouldReturnNotFound_WhenTransactionBelongsToAnotherUser()
+    {
+        // Arrange
+        var userAId = Guid.NewGuid();
+        var userBId = Guid.NewGuid();
+        var transactionId = Guid.NewGuid();
+        var command = new PatchTransactionCommand(transactionId, TransactionType.Income, "New Description");
+
+        _currentUserMock.UserId.Returns(userBId);
+        _transactionRepositoryMock.GetTransactionById(transactionId, userBId)
+            .Returns((Finance.Domain.Entities.Transaction?)null);
+
+        // Act
+        var result = await _handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.ErrorType.Should().Be(ErrorType.NotFound);
+        await _transactionRepositoryMock.Received(1).GetTransactionById(transactionId, userBId);
+        await _transactionRepositoryMock.DidNotReceive().GetTransactionById(transactionId, userAId);
+        await _transactionRepositoryMock.DidNotReceive()
+            .UpdateTransaction(Arg.Any<Finance.Domain.Entities.Transaction>());
+        await _unitOfWorkMock.DidNotReceive().CommitAsync();
+    }
+}

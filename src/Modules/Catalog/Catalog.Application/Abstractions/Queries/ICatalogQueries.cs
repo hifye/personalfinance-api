@@ -4,6 +4,6 @@ namespace Catalog.Application.Abstractions.Queries;
 
 public interface ICatalogQueries
 {
-    Task<CatalogListItem?> GetCategoryDetails(Guid id);
+    Task<CatalogListItem?> GetCategoryDetails(Guid id, Guid userId);
     Task<IReadOnlyList<CatalogListItem>> GetCategoriesByUserId(Guid userId);
 }

@@ -9,14 +9,14 @@ namespace Finance.Infrastructure.Persistance.Queries;
 
 public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) : ITransactionQueries
 {
-    public async Task<TransactionListItem> GetTransactionDetails(Guid id)
+    public async Task<TransactionListItem?> GetTransactionDetails(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         var transaction = await connection.QueryFirstOrDefaultAsync<TransactionListItem>(
             TransactionSql.GetTransactionDetails,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
-        return transaction ?? throw new InvalidOperationException($"Transaction with ID {id} not found");
+        return transaction;
     }
 
     public async Task<IReadOnlyList<TransactionListItem>> GetTransactionsByUserId(Guid userId)
@@ -50,4 +50,3 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
         return summary ?? throw new InvalidOperationException($"Transaction summary for user {userId} not found");
     }
 }
-

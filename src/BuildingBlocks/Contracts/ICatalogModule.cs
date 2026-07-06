@@ -2,5 +2,5 @@
 
 public interface ICatalogModule
 {
-    Task<bool> CategoryExistsAsync(Guid categoryId, CancellationToken ct = default);
+    Task<bool> CategoryExistsAsync(Guid categoryId, Guid userId, CancellationToken ct);
 }

@@ -9,7 +9,7 @@ public static class CatalogSql
                                                  is_active       AS IsActive,
                                                  created_at      AS CreatedAt
                                           FROM catalog.categories
-                                          WHERE id = @Id
+                                          WHERE id = @Id AND user_id = @UserId
                                           """;
 
     public const string GetCategoryDetails = """
@@ -19,7 +19,7 @@ public static class CatalogSql
                                                     is_active       AS IsActive,
                                                     created_at      AS CreatedAt
                                              FROM catalog.categories
-                                             WHERE id = @Id
+                                             WHERE id = @Id AND user_id = @UserId
                                              """;
 
     public const string GetCategoriesByUserId = """
@@ -53,12 +53,12 @@ public static class CatalogSql
                                          SET name = @Name,
                                             type = @Type,
                                             is_active = @IsActive
-                                         WHERE id = @Id
+                                         WHERE id = @Id AND user_id = @UserId
                                          """;
 
     public const string DeleteCategory = """
                                          UPDATE catalog.categories
                                          SET is_active = false
-                                         WHERE id = @Id
+                                         WHERE id = @Id AND user_id = @UserId
                                          """;
 }

@@ -1,3 +1,4 @@
+using System.Net;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -134,13 +135,6 @@ try
 
     static string GetClientIp(HttpContext context)
     {
-        var forwarded = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
-        if (!string.IsNullOrEmpty(forwarded))
-        {
-            var clientIp = forwarded.Split(',')[0].Trim();
-            return clientIp;
-        }
-
         return context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
     }
 
@@ -185,15 +179,22 @@ try
 
     var app = builder.Build();
 
-    app.UseForwardedHeaders(new ForwardedHeadersOptions()
+    var forwardedHeadersOptions = new ForwardedHeadersOptions
     {
-        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-    });
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+        ForwardLimit = 1
+    };
+
+    forwardedHeadersOptions.KnownProxies.Add(IPAddress.Parse("10.0.1.25"));
+
+    app.UseForwardedHeaders(forwardedHeadersOptions);
 
     if (app.Environment.IsDevelopment())
+    {
         app.MapOpenApi();
+        app.MapScalarApiReference();
+    }
 
-    app.MapScalarApiReference();
 
     app.UseSerilogRequestLogging(options =>
     {

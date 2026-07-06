@@ -9,12 +9,12 @@ namespace Finance.Infrastructure.Persistance.Repositories;
 public sealed class RecurringTransactionRepository(IUnitOfWork unitOfWork, IDbConnectionFactory connectionFactory)
     : IRecurringTransactionRepository
 {
-    public async Task<RecurringTransaction?> GetRecurringTransactionById(Guid id)
+    public async Task<RecurringTransaction?> GetRecurringTransactionById(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<RecurringTransaction>(
             RecurringTransactionSql.GetRecurringTransactionById,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
     }
 
@@ -63,12 +63,12 @@ public sealed class RecurringTransactionRepository(IUnitOfWork unitOfWork, IDbCo
     }
 
 
-    public async Task<bool> DeleteRecurringTransaction(Guid id)
+    public async Task<bool> DeleteRecurringTransaction(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         return await connection.ExecuteAsync(
             RecurringTransactionSql.DeleteRecurringTransaction,
-            new { Id = id },
+            new { Id = id, UserId = userId },
             transaction: unitOfWork.Transaction
         ) > 0;
     }

@@ -22,14 +22,15 @@ public sealed class CreateTransactionCommandHandler(
         CancellationToken cancellationToken
     )
     {
-        var categoryExists = await catalogModule.CategoryExistsAsync(command.CategoryId, cancellationToken);
+        var categoryExists =
+            await catalogModule.CategoryExistsAsync(command.CategoryId, currentUser.UserId, cancellationToken);
         if (!categoryExists)
         {
             logger.LogWarning("Category with ID {CategoryId} not found", command.CategoryId);
             return Result<Guid>.Failure("Category not found.", ErrorType.NotFound);
         }
 
-        var account = await accountRepository.GetAccountById(command.AccountId);
+        var account = await accountRepository.GetAccountById(command.AccountId, currentUser.UserId);
         if (account is null)
         {
             logger.LogWarning("Account with ID {AccountId} not found", command.AccountId);
@@ -39,7 +40,8 @@ public sealed class CreateTransactionCommandHandler(
         if (command.RecurringId.HasValue)
         {
             var recurringTransaction = await recurringTransactionRepository.GetRecurringTransactionById(
-                command.RecurringId.Value
+                command.RecurringId.Value,
+                currentUser.UserId
             );
             if (recurringTransaction is null)
             {
@@ -66,4 +68,3 @@ public sealed class CreateTransactionCommandHandler(
             });
     }
 }
-

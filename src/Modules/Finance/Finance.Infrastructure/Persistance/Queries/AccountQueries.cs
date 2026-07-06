@@ -8,12 +8,12 @@ namespace Finance.Infrastructure.Persistance.Queries;
 
 public sealed class AccountQueries(IDbConnectionFactory connectionFactory) : IAccountQueries
 {
-    public async Task<AccountListItem> GetAccountDetails(Guid id)
+    public async Task<AccountListItem?> GetAccountDetails(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         var account = await connection.QueryFirstOrDefaultAsync<AccountListItem>(AccountSql.GetAccountDetails,
-            new { Id = id });
-        return account ?? throw new InvalidOperationException($"Account with ID {id} not found");
+            new { Id = id, UserId = userId });
+        return account;
     }
 
 

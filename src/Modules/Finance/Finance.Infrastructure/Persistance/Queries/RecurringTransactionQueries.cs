@@ -11,13 +11,13 @@ namespace Finance.Infrastructure.Persistance.Queries;
 public sealed class RecurringTransactionQueries(IDbConnectionFactory connectionFactory)
     : IRecurringTransactionQueries
 {
-    public async Task<RecurringTransactionListItem> GetRecurringTransactionDetails(Guid id)
+    public async Task<RecurringTransactionListItem?> GetRecurringTransactionDetails(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         var recurringTransaction =
             await connection.QueryFirstOrDefaultAsync<RecurringTransactionDbModel>(
                 RecurringTransactionSql.GetRecurringTransactionDetails,
-                new { Id = id }
+                new { Id = id, UserId = userId }
             );
 
         if (recurringTransaction is null)
@@ -49,4 +49,3 @@ public sealed class RecurringTransactionQueries(IDbConnectionFactory connectionF
             );
     }
 }
-

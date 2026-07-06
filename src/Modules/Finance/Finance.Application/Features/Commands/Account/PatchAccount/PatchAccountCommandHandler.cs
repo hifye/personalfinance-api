@@ -6,12 +6,16 @@ using SharedKernel.Common;
 
 namespace Finance.Application.Features.Commands.Account.PatchAccount;
 
-public sealed class PatchAccountCommandHandler(IAccountRepository accountRepository, IUnitOfWork unitOfWork, ILogger<PatchAccountCommandHandler> logger)
+public sealed class PatchAccountCommandHandler(
+    ICurrentUser currentUser,
+    IAccountRepository accountRepository,
+    IUnitOfWork unitOfWork,
+    ILogger<PatchAccountCommandHandler> logger)
     : IRequestHandler<PatchAccountCommand, Result>
 {
     public async Task<Result> Handle(PatchAccountCommand command, CancellationToken cancellationToken)
     {
-        var account = await accountRepository.GetAccountById(command.Id);
+        var account = await accountRepository.GetAccountById(command.Id, currentUser.UserId);
         if (account is null)
         {
             logger.LogWarning("Account with ID {AccountId} not found", command.Id);

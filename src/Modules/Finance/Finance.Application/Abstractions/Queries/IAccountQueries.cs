@@ -4,6 +4,6 @@ namespace Finance.Application.Abstractions.Queries;
 
 public interface IAccountQueries
 {
-    Task<AccountListItem> GetAccountDetails(Guid id);
+    Task<AccountListItem?> GetAccountDetails(Guid id, Guid userId);
     Task<IReadOnlyList<AccountListItem>> GetAccountsByUserId(Guid userId);
 }

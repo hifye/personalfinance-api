@@ -8,14 +8,14 @@ namespace Catalog.Infrastructure.Persistance.Queries;
 
 public sealed class CatalogQueries(IDbConnectionFactory connectionFactory) : ICatalogQueries
 {
-    public async Task<CatalogListItem> GetCategoryDetails(Guid id)
+    public async Task<CatalogListItem?> GetCategoryDetails(Guid id, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         var category = await connection.QueryFirstOrDefaultAsync<CatalogListItem>(
             CatalogSql.GetCategoryDetails,
-            new { Id = id }
+            new { Id = id, UserId = userId }
         );
-        return category ?? throw new InvalidOperationException($"Category with ID {id} not found");
+        return category;
     }
 
     public async Task<IReadOnlyList<CatalogListItem>> GetCategoriesByUserId(Guid userId)

@@ -12,19 +12,19 @@ public static class AccountSql
                                                 is_active       AS IsActive,
                                                 created_at      AS CreatedAt
                                          FROM finance.accounts
-                                         WHERE id = @Id
+                                         WHERE id = @Id AND user_id = @UserId
                                          """;
 
     public const string GetAccountDetails = """
-                                                SELECT id              AS Id,
-                                                       name            AS Name,
-                                                       type            AS Type,
-                                                       current_balance AS CurrentBalance,
-                                                       is_active       AS IsActive,
-                                                       created_at      AS CreatedAt
-                                                FROM finance.accounts
-                                                WHERE id = @Id
-                                                """;
+                                            SELECT id              AS Id,
+                                                   name            AS Name,
+                                                   type            AS Type,
+                                                   current_balance AS CurrentBalance,
+                                                   is_active       AS IsActive,
+                                                   created_at      AS CreatedAt
+                                            FROM finance.accounts
+                                            WHERE id = @Id AND user_id = @UserId
+                                            """;
 
     public const string GetAccountsByUserId = """
                                               SELECT id              AS Id,
@@ -61,13 +61,12 @@ public static class AccountSql
                                         UPDATE finance.accounts
                                         SET type = @Type,
                                             is_active = @IsActive
-                                        WHERE id = @Id
+                                        WHERE id = @Id AND user_id = @UserId
                                         """;
 
     public const string DeleteAccount = """
                                         UPDATE finance.accounts
                                         SET is_active = false
-                                        WHERE id = @Id
+                                        WHERE id = @Id AND user_id = @UserId
                                         """;
 }
-

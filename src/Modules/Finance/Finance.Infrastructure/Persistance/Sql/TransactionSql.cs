@@ -14,7 +14,7 @@ public static class TransactionSql
                                                     created_at                      AS CreatedAt,
                                                     updated_at                      AS UpdatedAt
                                              FROM finance.transactions
-                                             WHERE id = @Id
+                                             WHERE id = @Id AND user_id = @UserId
                                              """;
 
     public const string GetTransactionDetails = """
@@ -29,7 +29,7 @@ public static class TransactionSql
                                                        created_at                       AS CreatedAt,
                                                        updated_at                       AS UpdatedAt
                                                 FROM finance.transactions
-                                                WHERE id = @Id
+                                                WHERE id = @Id AND user_id = @UserId
                                                 """;
 
     public const string GetTransactionsByUserId = """
@@ -86,11 +86,11 @@ public static class TransactionSql
                                             SET type = @Type,
                                                 description = @Description,
                                                 updated_at = @UpdatedAt
-                                            WHERE id = @Id
+                                            WHERE id = @Id AND user_id = @UserId
                                             """;
 
     public const string DeleteTransaction = """
                                             DELETE FROM finance.transactions    
-                                            WHERE id = @Id
+                                            WHERE id = @Id AND user_id = @UserId
                                             """;
 }
