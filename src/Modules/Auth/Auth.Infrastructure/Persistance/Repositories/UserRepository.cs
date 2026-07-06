@@ -16,9 +16,8 @@ public sealed class UserRepository(IDbConnectionFactory connectionFactory, IUnit
     public async Task<User> GetUserById(Guid id)
     {
         using var connection = connectionFactory.CreateConnection();
-        return (
-            await connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id })
-        )!;
+        var user = await connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id });
+        return user ?? throw new InvalidOperationException($"User with ID {id} not found");
     }
 
     public async Task<User?> GetUserByEmail(Email email)

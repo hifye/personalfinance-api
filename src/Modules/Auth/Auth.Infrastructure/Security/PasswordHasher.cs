@@ -86,13 +86,10 @@ public sealed class PasswordHasher : IPasswordHasher
 
         var iterations = int.Parse(parts[1]);
         var memory = int.Parse(parts[2]);
-        var paralelism = int.Parse(parts[3]);
+        var parallelism = int.Parse(parts[3]);
 
-        return iterations < Iterations
-            || iterations > Iterations
-            || memory < Memory
-            || memory > Memory
-            || paralelism < Parallelism
-            || paralelism > Parallelism;
+        return iterations != Iterations
+            || memory != Memory
+            || parallelism != Parallelism;
     }
 }

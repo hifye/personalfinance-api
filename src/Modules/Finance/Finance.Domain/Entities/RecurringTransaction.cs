@@ -1,4 +1,5 @@
-﻿using Finance.Domain.Enums;
+using BuildingBlocks.Constants;
+using Finance.Domain.Enums;
 using SharedKernel.Common;
 using SharedKernel.ValueObjects;
 
@@ -57,7 +58,7 @@ public sealed class RecurringTransaction
             )
             .Bind(() =>
                 Guard.AgainstOutOfRange(
-                    description.Length > 250,
+                    description.Length > TransactionConstants.MaxDescriptionLength,
                     "The field Description cannot be longer than 250 characters."
                 )
             )
@@ -117,7 +118,7 @@ public sealed class RecurringTransaction
     {
         return Guard
             .AgainstOutOfRange(
-                description.Length > 250,
+                description.Length > TransactionConstants.MaxDescriptionLength,
                 "The field Description cannot be longer than 250 characters."
             )
             .Bind(() =>

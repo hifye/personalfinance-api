@@ -11,10 +11,11 @@ public sealed class CatalogQueries(IDbConnectionFactory connectionFactory) : ICa
     public async Task<CatalogListItem> GetCategoryDetails(Guid id)
     {
         using var connection = connectionFactory.CreateConnection();
-        return (await connection.QueryFirstOrDefaultAsync<CatalogListItem>(
+        var category = await connection.QueryFirstOrDefaultAsync<CatalogListItem>(
             CatalogSql.GetCategoryDetails,
             new { Id = id }
-        ))!;
+        );
+        return category ?? throw new InvalidOperationException($"Category with ID {id} not found");
     }
 
     public async Task<IReadOnlyList<CatalogListItem>> GetCategoriesByUserId(Guid userId)

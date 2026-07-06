@@ -29,7 +29,7 @@ public sealed class CreateRecurringTransactionCommandHandler(
         if (!categoryExists)
         {
             logger.LogWarning("Category with ID {CategoryId} not found", command.CategoryId);
-            return Result<Guid>.Failure("Category Not Found", ErrorType.NotFound);
+            return Result<Guid>.Failure("Category not found", ErrorType.NotFound);
         }
         
         return await Domain.Entities.RecurringTransaction

@@ -27,9 +27,11 @@ public static class RecurringTransactionSql
                                                                 type                      AS Type,
                                                                 description               AS Description,
                                                                 frequency                 AS Frequency,
-                                                                next_occurrence           AS NextOccurrence,
+                                                                start_date                AS StartDate,
                                                                 end_date                  AS EndDate,
-                                                                is_active                 AS IsActive
+                                                                next_occurrence           AS NextOccurrence,
+                                                                is_active                 AS IsActive,
+                                                                created_at                AS CreatedAt
                                                          FROM finance.recurring_transactions
                                                          WHERE id = @Id
                                                          """;

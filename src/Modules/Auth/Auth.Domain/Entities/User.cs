@@ -1,4 +1,5 @@
 ﻿using System;
+using BuildingBlocks.Constants;
 using SharedKernel.Common;
 using SharedKernel.ValueObjects;
 
@@ -26,7 +27,7 @@ public sealed class User
     {
         return Guard
             .AgainstNullOrWhiteSpace(name, "Name cannot be empty.")
-            .Bind(() => name.Length > 200
+            .Bind(() => name.Length > UserConstants.MaxNameLength
                 ? Result.Failure("Name cannot be longer than 200 characters.", ErrorType.Validation)
                 : Result.Success())
             .Bind(() => Guard.AgainstNullOrWhiteSpace(passwordHash, "Password cannot be empty."))

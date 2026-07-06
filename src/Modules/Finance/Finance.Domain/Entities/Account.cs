@@ -1,4 +1,5 @@
-﻿using Finance.Domain.Enums;
+using BuildingBlocks.Constants;
+using Finance.Domain.Enums;
 using SharedKernel.Common;
 using SharedKernel.ValueObjects;
 
@@ -31,7 +32,7 @@ public sealed class Account
     {
         return Guard.AgainstOutOfRange(userId == Guid.Empty, "The field User id is mandatory.")
             .Bind(() => Guard.AgainstNullOrWhiteSpace(name, "The field name is mandatory."))
-            .Bind(() => name.Length > 50
+            .Bind(() => name.Length > AccountConstants.MaxNameLength
                 ? Result.Failure("The name cannot be longer than 50 characters.", ErrorType.Validation)
                 : Result.Success())
             .Bind(() => Price.Create(initialBalance))

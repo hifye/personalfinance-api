@@ -14,6 +14,6 @@ public sealed class PatchAccountCommandValidator : AbstractValidator<PatchAccoun
         RuleFor(x => x.Type)
             .IsInEnum()
             .When(x => x.Type.HasValue)
-            .WithMessage("Invalid transaction type.");  
+            .WithMessage("Invalid account type.");
     }
 }

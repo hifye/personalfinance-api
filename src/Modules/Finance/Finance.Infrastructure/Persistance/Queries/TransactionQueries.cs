@@ -12,12 +12,11 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
     public async Task<TransactionListItem> GetTransactionDetails(Guid id)
     {
         using var connection = connectionFactory.CreateConnection();
-        return (
-            await connection.QueryFirstOrDefaultAsync<TransactionListItem>(
-                TransactionSql.GetTransactionDetails,
-                new { Id = id }
-            )
-        )!;
+        var transaction = await connection.QueryFirstOrDefaultAsync<TransactionListItem>(
+            TransactionSql.GetTransactionDetails,
+            new { Id = id }
+        );
+        return transaction ?? throw new InvalidOperationException($"Transaction with ID {id} not found");
     }
 
     public async Task<IReadOnlyList<TransactionListItem>> GetTransactionsByUserId(Guid userId)
@@ -37,19 +36,18 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
     )
     {
         using var connection = connectionFactory.CreateConnection();
-        return (
-            await connection.QueryFirstOrDefaultAsync<TransactionSummary>(
-                TransactionSql.GetTransactionSummary,
-                new
-                {
-                    UserId = userId,
-                    StartDate = startDate,
-                    EndDate = endDate,
-                    IncomeType = (short)TransactionType.Income,
-                    ExpenseType = (short)TransactionType.Expense
-                }
-            )
-        )!;
+        var summary = await connection.QueryFirstOrDefaultAsync<TransactionSummary>(
+            TransactionSql.GetTransactionSummary,
+            new
+            {
+                UserId = userId,
+                StartDate = startDate,
+                EndDate = endDate,
+                IncomeType = (short)TransactionType.Income,
+                ExpenseType = (short)TransactionType.Expense
+            }
+        );
+        return summary ?? throw new InvalidOperationException($"Transaction summary for user {userId} not found");
     }
 }
 

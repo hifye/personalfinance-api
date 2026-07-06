@@ -26,6 +26,7 @@ public static class TransactionSql
                                                        type                             AS Type,
                                                        description                      AS Description,
                                                        transaction_date                 AS TransactionDate,
+                                                       created_at                       AS CreatedAt,
                                                        updated_at                       AS UpdatedAt
                                                 FROM finance.transactions
                                                 WHERE id = @Id

@@ -16,7 +16,7 @@ public sealed class GetTransactionDetailsQueryHandler(ITransactionQueries transa
         if (transaction is not null) 
             return Result<TransactionListItem>.Success(transaction);
         
-        logger.LogWarning("Transaction with ID {TransactionId} not found for query ID {QueryId}", transaction?.Id, query.Id);
+        logger.LogWarning("Transaction with ID {TransactionId} not found for query ID {QueryId}", query.Id, query.Id);
         return Result<TransactionListItem>.Failure("Transaction not found", ErrorType.NotFound);
 
     }

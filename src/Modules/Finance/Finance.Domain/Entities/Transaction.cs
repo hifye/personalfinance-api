@@ -1,4 +1,5 @@
-﻿using Finance.Domain.Enums;
+using BuildingBlocks.Constants;
+using Finance.Domain.Enums;
 using SharedKernel.Common;
 using SharedKernel.ValueObjects;
 
@@ -46,7 +47,7 @@ public sealed class Transaction
                 categoryId == Guid.Empty,
                 "The field Category id cannot be empty"))
             .Bind(() => Guard.AgainstOutOfRange(
-                description.Length > 250,
+                description.Length > TransactionConstants.MaxDescriptionLength,
                 "The field Description cannot be longer than 250 characters."))
             .Bind(() => Price.Create(amount))
             .Map(validPrice =>
@@ -85,7 +86,7 @@ public sealed class Transaction
     private Result UpdateDescription(string description)
     {
         return Guard.AgainstOutOfRange(
-                description.Length > 250,
+                description.Length > TransactionConstants.MaxDescriptionLength,
                 "The field Description cannot be longer than 250 characters.")
             .Bind(() =>
             {

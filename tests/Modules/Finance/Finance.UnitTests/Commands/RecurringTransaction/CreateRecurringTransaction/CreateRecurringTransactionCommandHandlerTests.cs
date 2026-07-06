@@ -92,7 +92,7 @@ public sealed class CreateRecurringTransactionCommandHandlerTests
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Should().Be("Category Not Found");
+        result.Error.Should().Be("Category not found");
         result.ErrorType.Should().Be(ErrorType.NotFound);
     }
 }

@@ -28,7 +28,6 @@ public sealed class CreateTransactionValidator : AbstractValidator<CreateTransac
         
         RuleFor(x => x.Description)
             .MaximumLength(TransactionConstants.MaxDescriptionLength)
-            .When(_ => true)
-            .WithMessage("Description cannot be longer than 250 characters.");       
+            .WithMessage("Description cannot be longer than 250 characters.");
     }
 }

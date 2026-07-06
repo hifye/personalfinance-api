@@ -11,8 +11,9 @@ public sealed class AccountQueries(IDbConnectionFactory connectionFactory) : IAc
     public async Task<AccountListItem> GetAccountDetails(Guid id)
     {
         using var connection = connectionFactory.CreateConnection();
-        return (await connection.QueryFirstOrDefaultAsync<AccountListItem>(AccountSql.GetAccountDetails,
-            new { Id = id }))!;
+        var account = await connection.QueryFirstOrDefaultAsync<AccountListItem>(AccountSql.GetAccountDetails,
+            new { Id = id });
+        return account ?? throw new InvalidOperationException($"Account with ID {id} not found");
     }
 
 
