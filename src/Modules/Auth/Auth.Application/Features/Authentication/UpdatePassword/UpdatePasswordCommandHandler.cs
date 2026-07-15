@@ -25,7 +25,7 @@ public sealed class UpdatePasswordCommandHandler(
             return Result.Failure("User not found", ErrorType.NotFound);
         }
 
-        if (!passwordHasher.VerifyPassword(user.PasswordHash, command.CurrentPassword))
+        if (!passwordHasher.VerifyPassword(command.CurrentPassword, user.PasswordHash))
         {
             logger.LogWarning("Current password is incorrect for user {UserId}", currentUser.UserId);
             return Result.Failure("Current password is incorrect", ErrorType.Validation);
