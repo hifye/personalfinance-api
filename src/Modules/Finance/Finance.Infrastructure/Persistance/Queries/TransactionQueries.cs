@@ -29,7 +29,7 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
             );
     }
 
-    public async Task<TransactionSummary> GetTransactionSummary(
+    public async Task<TransactionSummary?> GetTransactionSummary(
         Guid userId,
         DateTime startDate,
         DateTime endDate
@@ -47,6 +47,6 @@ public sealed class TransactionQueries(IDbConnectionFactory connectionFactory) :
                 ExpenseType = (short)TransactionType.Expense
             }
         );
-        return summary ?? throw new InvalidOperationException($"Transaction summary for user {userId} not found");
+        return summary;
     }
 }

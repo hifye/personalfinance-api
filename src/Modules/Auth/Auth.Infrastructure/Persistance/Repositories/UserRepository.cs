@@ -13,11 +13,10 @@ namespace Auth.Infrastructure.Persistance.Repositories;
 public sealed class UserRepository(IDbConnectionFactory connectionFactory, IUnitOfWork unitOfWork)
     : IUserRepository
 {
-    public async Task<User> GetUserById(Guid id)
+    public async Task<User?> GetUserById(Guid id)
     {
         using var connection = connectionFactory.CreateConnection();
-        var user = await connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id });
-        return user ?? throw new InvalidOperationException($"User with ID {id} not found");
+        return await connection.QueryFirstOrDefaultAsync<User>(UserSql.GetUserById, new { Id = id });
     }
 
     public async Task<User?> GetUserByEmail(Email email)

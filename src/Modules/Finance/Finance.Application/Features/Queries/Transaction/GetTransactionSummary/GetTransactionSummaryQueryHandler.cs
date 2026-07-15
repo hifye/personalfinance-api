@@ -27,6 +27,12 @@ public sealed class GetTransactionSummaryQueryHandler(
             query.EndDate
         );
         
+        if (summary is null)
+        {
+            logger.LogInformation("No transaction summary found for user {UserId}", currentUser.UserId);
+            return Result<TransactionSummary>.Failure("No transactions found for the specified period", ErrorType.NotFound);
+        }
+
         return Result<TransactionSummary>.Success(summary);
     }
 }
