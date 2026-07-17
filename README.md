@@ -121,7 +121,7 @@ Gerenciamento de contas bancárias e transações.
 - Contas com saldo inicial e corrente
 - Transações simples (receita/despesa)
 - Transações recorrentes com frequência configurável (diária, semanal, mensal, anual)
-- Resumo financeiro por período
+- Resumo financeiro por período.
 
 **Entidades:** `Account`, `Transaction`, `RecurringTransaction`
 
