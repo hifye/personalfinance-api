@@ -127,7 +127,7 @@ Gerenciamento de contas bancárias e transações.
 
 ### Catalog
 
-Categorias de transações por usuário.
+Categorias de transações por usuário
 
 - Categorias do tipo Receita ou Despesa
 - Expõe `ICatalogModule` (via BuildingBlocks) para outros módulos verificarem existência de categoria
